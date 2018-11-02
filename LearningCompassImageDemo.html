@@ -1,0 +1,43 @@
+<html>
+<script src="https://www.celljs.org/cell.js"></script>
+<script src="https://selecttransform.github.io/st.js/st.js"></script>
+<link href="../../dist/jason.css" rel="stylesheet">
+<script src="../../dist/jason.js"></script>
+<style>
+body {
+  margin: 0;
+}
+</style>
+<script>
+var app = Jason({
+  $cell: true,
+  style: {
+    width: "1000px",
+    margin: "0 auto"
+  }
+}, {
+  "$jason": {
+    "head": {
+      "title": "Basic"
+    },
+    "body": {
+      "header": {
+        "title": "Basic Example",
+        "style": {
+          "background": "#3a3a3a",
+          "color": "#ffffff",
+          "padding": "10"
+        }
+      },
+      "background": "#2a2a2a",
+      "sections": [{
+        "items": [ {
+          "type": "image",
+          "url" : "http://www.oecd.org/media/oecdorg/directorates/directorateforeducation/webimages/E2030_Visual_Framework_Feb-18%20(2)-1000x571.png"
+        }]
+      }]
+    }
+  }
+})
+</script>
+</html>
