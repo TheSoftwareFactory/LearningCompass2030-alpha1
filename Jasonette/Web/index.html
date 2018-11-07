@@ -1,0 +1,84 @@
+<html>
+<script src="https://www.celljs.org/cell.js"></script>
+<script src="https://selecttransform.github.io/st.js/st.js"></script>
+<script src="https://jasonette.github.io/Jasonette-Web/dist/jason.js"></script>
+<link href="https://jasonette.github.io/Jasonette-Web/dist/jason.css" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+}
+</style>
+<script>
+var app = Jason({
+  $cell: true,
+  style: {
+    width: "1000px",
+    margin: "0 auto"
+  }
+}, {
+  "$jason": {
+    "head": {
+      "title": "Learning Compass"
+    },
+    "body": {
+      "header": {
+        "title": "Learning Compass",
+        "style": {
+          "background": "#ffffff",
+          "font": "HelveticaNeue-Bold",
+          "color": "#0c0c0c",
+          "padding": "10"
+        },
+        "menu": {
+          "text": "Menu",
+          "style": {
+            "color": "#555555",
+            "font": "HelveticaNeue-Bold",
+            "size": "17"
+          },
+          "action": {
+            "type": "$util.toast",
+            "options": {
+              "text": "No menu for the moment!"
+            }
+          }
+        }
+      },
+
+      "background": "#ffffff",
+      "sections": [{
+        "items": [
+            {
+              "type": "label",
+              "text": "Welcome,",
+              "style": {
+                "top": "100",
+                "width": "100%",
+                "size": "30",
+                "padding": "10"
+              }
+            },
+            {
+              "type": "label",
+              "text": "The Future of Education and Skills 2030 project aims to help countries find answers to what knowledge, skills, attitudes and values are needed for today's students to thrive and shape their world, as well as how instructional systems can effectively develop them.",
+              "style": {
+                "top": "100",
+                "width": "100%",
+                "size": "20",
+                "padding": "10"
+              }
+            },
+            {
+            "type": "image",
+            "url" : "http://www.oecd.org/media/oecdorg/directorates/directorateforeducation/webimages/E2030_Visual_Framework_Feb-18%20(2)-1000x571.png",
+            "style": {
+              "width": "100%",
+              "background": "#ffffff"
+            }
+        }]
+      }]
+    }
+  }
+})
+</script>
+</html>
