@@ -41,6 +41,7 @@ export default class App extends React.Component {
         'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
         'noto-sans-regular': require('./assets/fonts/NotoSansSC-Regular.otf'),
         'noto-sans-light': require('./assets/fonts/NotoSansSC-Light.otf'),
+        'noto-sans-thin': require('./assets/fonts/NotoSansSC-Thin.otf'),
       }),
     ]);
   };
