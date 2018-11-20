@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">Learning Compass</string>
-    <string name="url">https://gitlab.com/Hareski/jasonette/raw/master/OECD.json?inline=false</string>
-    <string name="launch">file://preload.json</string>
-</resources>

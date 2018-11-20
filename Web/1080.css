@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,400');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html, body{
+    height: 100%;
+    margin:0;
+}
+section{margin-left: 10%; margin-right: 10%;}
+.textWelcome{
+    font-family: 'Noto Sans TC', sans-serif;
+    width: 40%;
+    margin-top: 10%;
+    height: 100%;
+    float: left;
+}
+.welcome{
+    text-align: right;
+    font-size: 3vw;
+    font-weight: 100;
+}
+.username{
+    font-size: 4vw;
+    text-align: right;
+}
+.description{
+    font-weight: 100;
+    margin-top: 5%;
+    font-size: 2vw;
+    text-align: right;
+}
+.flower{
+    width: 40%;
+    margin-top: 10%;
+    height: 100%;
+    float: right;
+}
+
+a.button6{
+    display:inline-block;
+    padding:0.7em 1.4em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.15em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    text-transform:uppercase;
+    font-weight:400;
+    color:#FFFFFF;
+    background-color:#3369ff;
+    box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    text-align:center;
+    position:relative;
+}
+a.button6:active{
+    top:0.1em;
+}
+@media all and (max-width:30em){
+    a.button6{
+        display:block;
+        margin:0.4em auto;
+        }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: scale3d(1,0,1);
+    }
+    100% {
+        transform: scale3d(1,0.5,1);
+    }
+}
+
+@keyframes slideInFromLeft2 {
+    0% {
+        transform: scale3d(1,0,1);
+    }
+    100% {
+        transform: scale3d(1,0.5,1);
+    }
+}
+
+path:hover {
+    transform: scale3d(1,1,1) rotate(1deg);
+    filter: invert(.8);
+    transition-duration: 0.1s;
+}
+path {
+    transition-duration: 0.1s;
+    transform: scale3d(1,0.5,1) rotate(0deg);
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+
+
+

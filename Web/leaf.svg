@@ -1,0 +1,15 @@
+<svg   xmlns='http://www.w3.org/2000/svg' viewBox="0 0 128 128" >
+  <g transform="translate(32,64)">
+    <g fill="#e98363ff" transform="rotate(0,32,0)"><path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></g>
+    <g fill="#885d90ff" transform="rotate(33.18,32,0)"><path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></g>
+    <g fill="#d7b65cff" transform="rotate(66.36,32,0)"><path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></g>
+    <g fill="#46b983ff" transform="rotate(99.55,32,0)"><path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></g>
+    <g fill="#78a364ff" transform="rotate(132.73,32,0)"><path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></g>
+    <g fill="#b15e6eff" transform="rotate(165.91,32,0)"><path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></g>
+    <g fill="#487faeff" transform="rotate(199.09,32,0)"><path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></g>
+    <g fill="#52afe1ff" transform="rotate(232.27,32,0)"><path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></g>
+    <g fill="#56b0a4ff" transform="rotate(265.45,32,0)"><path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></g>
+    <g fill="#995455ff" transform="rotate(298,32,0)"><path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></g>
+    <g fill="#6f7074ff" transform="rotate(329.5,32,0)"><path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></g>
+  </g>
+</svg>
