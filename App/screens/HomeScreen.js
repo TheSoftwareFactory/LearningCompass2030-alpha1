@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, Header } from 'react-native-elements';
 import {
   Image,
+  Text,
   Platform,
   ScrollView,
   StyleSheet,
@@ -34,16 +34,23 @@ import Svg,{
     Mask,
 } from 'react-native-svg';
 
-export default class HomeScreen extends React.Component {
 
+
+export default class HomeScreen extends React.Component {
+  static navigationOptions = {
+    // headerTitle instead of title
+    title: "Home",
+  };
   _onPressButton() {
     Alert.alert('You tapped the button!')
   }
 
   render() {
     return (
+
+      <View style={styles.container}>
+
       <ScrollView>
-      <View>
           <View >
             <View style={styles.coverGetStarted}>
               <Svg viewBox="0 0 128 128" width="80%" height="80%">
@@ -70,14 +77,14 @@ export default class HomeScreen extends React.Component {
            </View>
 
             <View style={styles.textGetStarted}>
-              <Text h1>Learning Compass</Text>
-              <Text>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
+              <Text  style={styles.h1}>Learning Compass</Text>
+              <Text style={styles.subtitle}>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
               OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
               </Text>
             </View>
           </View>
-      </View>
       </ScrollView>
+      </View>
     );
   }
 
@@ -96,10 +103,8 @@ export default class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
 
-
   container: {
     flex: 1,
-    width: "100%",
     backgroundColor: '#fff',
   },
   getStartedContainer: {
@@ -111,18 +116,30 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   coverGetStarted: {
+    marginTop:30,
     width: "100%",
     height: 300,
     alignItems: 'center',
   },
   textGetStarted: {
+    fontFamily: "noto-sans-light",
     color:'#fff',
     alignItems: 'center',
     margin: 20,
+  },
+  h1: {
+    fontFamily: "noto-sans-light",
+    color:'#212121',
+    fontSize: 40,
+  },
+  subtitle: {
+    fontFamily: "noto-sans-regular",
+    color:'#212121',
+    fontSize: 20,
   },
   buttonContainer: {
     margin: 20
   },
 
 
-}); 
+});
