@@ -7,7 +7,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  StatusBar
+  StatusBar,
+  Alert, AppRegistry, Button
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
@@ -35,24 +36,15 @@ import Svg,{
 
 export default class HomeScreen extends React.Component {
 
-
+  _onPressButton() {
+    Alert.alert('You tapped the button!')
+  }
 
   render() {
     return (
-      <View style={styles.container}>
-      <StatusBar
-  backgroundColor="blue"
-  barStyle="light-content"
-/>
-      <Header
-      leftComponent={{ icon: 'menu', color: '#fff' }}
-      centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-      rightComponent={{ icon: 'home', color: '#fff' }}
-      />
-
-          <View style={styles.getStartedContainer}>
-
-
+      <ScrollView>
+      <View>
+          <View >
             <View style={styles.coverGetStarted}>
               <Svg viewBox="0 0 128 128" width="80%" height="80%">
                 <G fill="#e98363ff" x="32" y="64" transform="rotate(0,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
@@ -69,15 +61,23 @@ export default class HomeScreen extends React.Component {
               </Svg>
             </View>
 
+            <View style={styles.buttonContainer}>
+             <Button
+               onPress={this._onPressButton}
+               title="Press Me"
+               color="#e98363ff"
+              />
+           </View>
+
             <View style={styles.textGetStarted}>
               <Text h1>Learning Compass</Text>
-              <Text>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.</Text>
+              <Text>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
+              OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
+              </Text>
             </View>
-
-
           </View>
-
       </View>
+      </ScrollView>
     );
   }
 
@@ -92,8 +92,6 @@ export default class HomeScreen extends React.Component {
   };
 }
 
-const width = '80%';
-const height = '100%';
 
 
 const styles = StyleSheet.create({
@@ -104,66 +102,27 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: '#fff',
   },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  coverGetStarted: {
-    flex:2,
-    width: "100%",
-    alignItems: 'center',
-  },
-  textGetStarted: {
-    flex:1,
-    color:'#fff',
-    alignItems: 'center',
-    margin: 20,
-  },
   getStartedContainer: {
     flex:1,
     width: "100%",
     alignItems: 'center',
   },
-
-
-
-
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+  contentContainer: {
+    paddingTop: 30,
   },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
+  coverGetStarted: {
+    width: "100%",
+    height: 300,
     alignItems: 'center',
   },
-  helpLink: {
-    paddingVertical: 15,
+  textGetStarted: {
+    color:'#fff',
+    alignItems: 'center',
+    margin: 20,
   },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
+  buttonContainer: {
+    margin: 20
   },
-});
+
+
+}); 
