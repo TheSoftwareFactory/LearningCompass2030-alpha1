@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   View,
   StatusBar,
-  Alert, AppRegistry, Button
+  Alert, AppRegistry, Button,
+  TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedback
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
@@ -46,28 +47,23 @@ export default class HomeScreen extends React.Component {
       <View>
           <View >
             <View style={styles.coverGetStarted}>
-              <Svg viewBox="0 0 128 128" width="80%" height="80%">
-                <G fill="#e98363ff" x="32" y="64" transform="rotate(0,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
-                <G fill="#885d90ff" x="32" y="64" transform="rotate(33.18,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
-                <G fill="#d7b65cff" x="32" y="64" transform="rotate(66.36,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
-                <G fill="#46b983ff" x="32" y="64" transform="rotate(99.55,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
-                <G fill="#78a364ff" x="32" y="64" transform="rotate(132.73,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
-                <G fill="#b15e6eff" x="32" y="64" transform="rotate(165.91,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
-                <G fill="#487faeff" x="32" y="64" transform="rotate(199.09,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
-                <G fill="#52afe1ff" x="32" y="64" transform="rotate(232.27,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
-                <G fill="#56b0a4ff" x="32" y="64" transform="rotate(265.45,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
-                <G fill="#995455ff" x="32" y="64" transform="rotate(298,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
-                <G fill="#6f7074ff" x="32" y="64" transform="rotate(329.5,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
-              </Svg>
+              <Svg viewBox="0 0 200 200" width="100%" height="100%">
+                <G fill="#e98363ff" x="68" y="100" transform="rotate(0,32,0)"><Path onPressIn={() => alert('lol')} d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G>
+                <G fill="#885d90ff" x="68" y="100" transform="rotate(33.18,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/></G> 
+                <G fill="#d7b65cff" x="68" y="100" transform="rotate(66.36,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/><Circle cx="32" cy="80" r="10"/></G>
+                <G fill="#46b983ff" x="68" y="100" transform="rotate(99.55,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/><Circle cx="32" cy="80" r="10"/></G>
+                <G fill="#78a364ff" x="68" y="100" transform="rotate(132.73,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/><Circle cx="32" cy="80" r="10"/></G>
+                <G fill="#b15e6eff" x="68" y="100" transform="rotate(165.91,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/><Circle cx="32" cy="80" r="10"/></G>
+                <G fill="#487faeff" x="68" y="100" transform="rotate(199.09,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/><Circle cx="32" cy="80" r="10"/></G>
+                <G fill="#52afe1ff" x="68" y="100" transform="rotate(232.27,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/><Circle cx="32" cy="80" r="10"/></G>
+                <G fill="#56b0a4ff" x="68" y="100" transform="rotate(265.45,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/><Circle cx="32" cy="80" r="10"/></G>
+                <G fill="#995455ff" x="68" y="100" transform="rotate(298,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/><Circle cx="32" cy="80" r="10"/></G>
+                <G fill="#6f7074ff" x="68" y="100" transform="rotate(329.5,32,0)"><Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z"/><Circle cx="32" cy="80" r="10"/></G>
+                <Circle cx="100" cy="185" r="10" onPress={() => alert('lol')} fill="#e98363ff" />
+                <Circle cx="100" cy="185" r="10"  transform="rotate(33.18, 100, 100)" fill="#885d90ff" onPressIn={() => alert('lol')} />
+              </Svg>            
             </View>
 
-            <View style={styles.buttonContainer}>
-             <Button
-               onPress={this._onPressButton}
-               title="Press Me"
-               color="#e98363ff"
-              />
-           </View>
 
             <View style={styles.textGetStarted}>
               <Text h1>Learning Compass</Text>
