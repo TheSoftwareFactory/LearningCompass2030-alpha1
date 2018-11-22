@@ -1,10 +1,12 @@
 import React from 'react';
-import { createSwitchNavigator } from 'react-navigation';
+import { Platform } from 'react-native';
+import { createSwitchNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import MainTabNavigator from './MainTabNavigator';
+
+import HomeScreen from '../screens/HomeScreen';
+import LinksScreen from './LinksNavigator';
 
 export default createSwitchNavigator({
-  // You could add another route here for authentication.
-  // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-  Main: MainTabNavigator,
+  Home: HomeScreen,
+  Links: LinksScreen,
 });

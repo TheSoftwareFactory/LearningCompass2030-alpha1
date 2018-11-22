@@ -1,14 +1,18 @@
 import React from 'react';
-import { ExpoConfigView } from '@expo/samples';
+import { WebView } from 'react-native';
+
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
-    title: 'app.json',
+    headerMode: 'none',
   };
 
   render() {
-    /* Go ahead and delete ExpoConfigView and replace it with your
-     * content, we just wanted to give you a quick view of your config */
-    return <ExpoConfigView />;
+    return (
+      <WebView
+        source={{uri: 'https://www.quora.com/What-are-OECD-countries'}}
+        style={{flex: 1}}
+      />
+    );
   }
 }

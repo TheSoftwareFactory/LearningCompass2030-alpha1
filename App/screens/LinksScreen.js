@@ -1,27 +1,69 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import {Image, Text, Platform, ScrollView, StyleSheet, TouchableOpacity, View, StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
-    title: 'Links',
+    title: 'Details',
   };
 
+  /* Body */
   render() {
     return (
-      <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
-      </ScrollView>
+      <View style={styles.container}>
+        <ScrollView>
+          <View style={styles.textGetStarted}>
+            <Text  style={styles.h1}>Learning Compass</Text>
+            <Text style={styles.subtitle}>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030. OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
+            </Text>
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }
 
+/* Style */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: '#fff',
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  getStartedContainer: {
+    flex:1,
+    width: "100%",
+    alignItems: 'center',
+  },
+  contentContainer: {
+    paddingTop: 30,
+  },
+  coverGetStarted: {
+    marginTop:30,
+    width: "100%",
+    height: 300,
+    alignItems: 'center',
+  },
+  textGetStarted: {
+    fontFamily: "noto-sans-light",
+    color:'#fff',
+    alignItems: 'center',
+    margin: 20,
+  },
+  h1: {
+    fontFamily: "noto-sans-light",
+    color:'#212121',
+    fontSize: 40,
+  },
+  subtitle: {
+    fontFamily: "noto-sans-thin",
+    color:'#212121',
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  buttonContainer: {
+    margin: 20
   },
 });
