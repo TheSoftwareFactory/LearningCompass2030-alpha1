@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Image, Text, Platform, ScrollView, StyleSheet, TouchableOpacity, View, StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
+import {Image, Text, Platform, NavigatorIOS, ScrollView, StyleSheet, TouchableOpacity, View, StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import { Constants, Svg } from 'expo';
@@ -21,7 +21,8 @@ export default class HomeScreen extends React.Component {
 
   /* Scripts */
   _onPressButton() {WebBrowser.openBrowserAsync('http://www.oecd.org/');}
-
+   /*_onHeartButton() {Platform.OS === 'ios' ? this.props.navigator.push('Links', {name: 'heart'}) : this.props.navigation('Links', {name: 'heart'});} */
+   _onHeartButton() {this.props.navigation('Links', {name: 'heart'});} 
   /* Data Structure */
   state = {
      'satisfactionValue': ''
@@ -33,15 +34,15 @@ export default class HomeScreen extends React.Component {
      this.setState({ 'satisfactionValue': "0.5" });
   }
 
+
+  /* const {navigate} = this.props.navigation;
   /* Body */
   render() {
-    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.coverGetStarted}>
             <Svg viewBox="0 0 180 180" width="100%" height="100%">
-
               {/* Display */}
               <Svg.G fill="#e98363ff" x="58" y="90" transform="rotate(0,32,0)" onPress={() => alert('lol')} ><Svg.Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z" transform={"scale(1 "+this.state.satisfactionValue+")"}/><Svg.Circle cx="32" cy="80" r="10"/>
               <Svg.Path x="32" y="85" d="M0 5 v-5 h5 a2,2 2 0,1 0,5 a2,2 2 0,1 -5,0 Z" transform="rotate(225)" fill="#fff"/>
@@ -65,7 +66,7 @@ export default class HomeScreen extends React.Component {
               {/* Interaction */}
               <Svg.Polygon  points="90,90 110,180 70,180" fill="none" onPress={this._onPressButton} />
               <Svg.Polygon  points="90,90 70,180 20,160" fill="none" onPress={this._onPressButton} />
-              <Svg.Polygon  points="90,90 20,160 0,105" fill="none" onPress={() => navigate('Links', {name: 'heart'})} />
+              <Svg.Polygon  points="90,90 20,160 0,105" fill="none" onPress={this._onHeartButton} />
             </Svg>
           </View>
           <View style={styles.textGetStarted}>
