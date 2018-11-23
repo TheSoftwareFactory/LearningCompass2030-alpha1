@@ -47,18 +47,18 @@ export default class HomeScreen extends React.Component {
   }
 
 
-  /* 
+  /*
   /* Body */
   render() {
     const {navigate} = this.props.navigation;
-     _onHeartButton = () => {navigate('Links', {name: 'heart'});} 
+     _onHeartButton = () => {navigate('Links', {name: 'heart'});}
     return (
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.coverGetStarted}>
             <Svg viewBox="0 0 180 180" width="100%" height="100%">
               {/* Display */}
-              <Svg.G fill="#e98363ff" x="58" y="90" transform="rotate(0,32,0)" onPress={() => alert('lol')} ><Svg.Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z" transform={"scale(1 "+this.state.satisfactionValue+")"}/><Svg.Circle cx="32" cy="80" r="10"/>
+              <Svg.G fill="#e98363ff" x="58" y="90" transform="rotate(0,32,0)"><Svg.Path d="M32 2 C32 2 16 48 32 64 C32 64 48 48 32 2 Z" transform={"scale(1 "+this.state.satisfactionValue+")"}/><Svg.Circle cx="32" cy="80" r="10"/>
               <Svg.Path x="32" y="85" d="M0 5 v-5 h5 a2,2 2 0,1 0,5 a2,2 2 0,1 -5,0 Z" transform="rotate(225)" fill="#fff"/>
               </Svg.G>
 
@@ -80,14 +80,10 @@ export default class HomeScreen extends React.Component {
               {/* Interaction */}
               <Svg.Polygon  points="90,90 110,180 70,180" fill="none" onPress={this._onPressButton} />
               <Svg.Polygon  points="90,90 70,180 20,160" fill="none" onPress={this._onPressButton} />
-              <Svg.Polygon  points="90,90 20,160 0,105" fill="none" onPress={_onHeartButton} />
+              <Svg.Polygon  points="90,90 20,160 0,105" fill="red" fillOpacity={0} onPressIn={_onHeartButton} />
             </Svg>
           </View>
 
-          <Button
-            onPress={_onHeartButton}
-            title="Learn More"
-            color="#841584"/>
           <View style={styles.textGetStarted}>
             <Text  style={styles.h1}>Learning Compass</Text>
             <Text style={styles.subtitle}>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030. OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
