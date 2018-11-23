@@ -22,8 +22,8 @@ export default class HomeScreen extends React.Component {
   /* Scripts */
   _onPressButton() {WebBrowser.openBrowserAsync('http://www.oecd.org/');}
    /*_onHeartButton() {Platform.OS === 'ios' ? this.props.navigator.push('Links', {name: 'heart'}) : this.props.navigation('Links', {name: 'heart'});} */
-   _onHeartButton() {this.props.navigation('Links', {name: 'heart'});} 
-  /* Data Structure */
+
+   /* Data Structure */
   state = {
      'satisfactionValue': ''
   }
@@ -47,9 +47,11 @@ export default class HomeScreen extends React.Component {
   }
 
 
-  /* const {navigate} = this.props.navigation;
+  /* 
   /* Body */
   render() {
+    const {navigate} = this.props.navigation;
+     _onHeartButton = () => {navigate('Links', {name: 'heart'});} 
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -78,9 +80,15 @@ export default class HomeScreen extends React.Component {
               {/* Interaction */}
               <Svg.Polygon  points="90,90 110,180 70,180" fill="none" onPress={this._onPressButton} />
               <Svg.Polygon  points="90,90 70,180 20,160" fill="none" onPress={this._onPressButton} />
-              <Svg.Polygon  points="90,90 20,160 0,105" fill="none" onPress={this._onHeartButton} />
+              <Svg.Polygon  points="90,90 20,160 0,105" fill="none" onPress={_onHeartButton} />
             </Svg>
           </View>
+
+          <Button
+            onPress={_onHeartButton}
+            title="Learn More"
+            color="#841584"/>
+            
           <View style={styles.textGetStarted}>
             <Text  style={styles.h1}>Learning Compass</Text>
             <Text style={styles.subtitle}>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030. OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.

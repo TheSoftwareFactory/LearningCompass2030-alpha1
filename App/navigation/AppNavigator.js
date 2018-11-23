@@ -5,8 +5,12 @@ import { createSwitchNavigator, createStackNavigator, createBottomTabNavigator }
 
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from './LinksNavigator';
+import LearnScreen from '../screens/LearnScreen';
 
-export default createSwitchNavigator({
+export default createStackNavigator({
   Home: HomeScreen,
   Links: LinksScreen,
+  Learn: LearnScreen
+}, { 
+  headerMode: 'none'
 });

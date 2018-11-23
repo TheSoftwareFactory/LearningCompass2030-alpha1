@@ -1,27 +1,20 @@
 import React from 'react';
 import {Image, Text, Platform, ScrollView, StyleSheet, TouchableOpacity, View, StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 
-export default class LinksScreen extends React.Component {
+export default class LearnScreen extends React.Component {
   static navigationOptions = {
-    title: 'Details',
+    title: 'Learn',
   };
 
   /* Body */
   render() {
-    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.textGetStarted}>
-            <Text  style={styles.h1}>Learning</Text>
+            <Text  style={styles.h1}>If you want to leanr this topic, you should do the following things :</Text>
             <Text style={styles.subtitle}>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030. OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
             </Text>
-          </View>
-          <View>
-          <Button
-            onPress={() => navigate('Learn', {name: 'heart'})}
-            title="Learn More"
-            color="#841584"/>
           </View>
         </ScrollView>
       </View>

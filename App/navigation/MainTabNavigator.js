@@ -7,6 +7,7 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 import Colors from '../constants/Colors';
+import LearnScreen from '../screens/LearnScreen';
 
 const LinksStack = createStackNavigator({
   Links: LinksScreen,
