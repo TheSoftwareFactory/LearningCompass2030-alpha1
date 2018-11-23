@@ -27,11 +27,23 @@ export default class HomeScreen extends React.Component {
   state = {
      'satisfactionValue': ''
   }
-  componentDidMount = () => AsyncStorage.getItem('satisfactionValue').then((value) => this.setState({ 'satisfactionValue': value }))
+  componentDidMount = () => {
+    try {
+      const value = AsyncStorage.getItem('satisfactionvalue');
+      if (value !== null) {
+        this.setState({ 'satisfactionvalue': value });
+      }
+      else{
+        this.setState({ 'satisfactionvalue': "0.5" });
+      }
+     } catch (error) {
+       this.setState({ 'satisfactionvalue': "0.5" });
+     }
+  }
 
   setName = () => {
-     AsyncStorage.setItem('satisfactionValue', "0.5");
-     this.setState({ 'satisfactionValue': "0.5" });
+     AsyncStorage.setItem('satisfactionvalue', "0.5");
+     this.setState({ 'satisfactionvalue': "0.5" });
   }
 
 
