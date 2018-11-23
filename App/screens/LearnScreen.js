@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Text, Platform, ScrollView, StyleSheet, TouchableOpacity, View, StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
+import {Image, Text, Platform, ScrollView, StyleSheet, TouchableOpacity, View, StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, WebView, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 
 export default class LearnScreen extends React.Component {
   static navigationOptions = {
@@ -16,6 +16,10 @@ export default class LearnScreen extends React.Component {
             <Text style={styles.subtitle}>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030. OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
             </Text>
           </View>
+ 
+          <WebView
+           source={{uri: 'https://www.youtube.com/embed/o08ykAqLOxk'}}
+           style={{width: 400, height: 400}} />
         </ScrollView>
       </View>
     );

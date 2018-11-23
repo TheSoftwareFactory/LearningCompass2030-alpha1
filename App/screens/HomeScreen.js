@@ -88,7 +88,6 @@ export default class HomeScreen extends React.Component {
             onPress={_onHeartButton}
             title="Learn More"
             color="#841584"/>
-            
           <View style={styles.textGetStarted}>
             <Text  style={styles.h1}>Learning Compass</Text>
             <Text style={styles.subtitle}>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030. OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
