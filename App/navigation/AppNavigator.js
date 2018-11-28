@@ -7,10 +7,31 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from './LinksNavigator';
 import LearnScreen from '../screens/LearnScreen';
 
-export default createStackNavigator({
-  Home: HomeScreen,
-  Links: LinksScreen,
-  Learn: LearnScreen
-}, { 
-  headerMode: 'none'
-});
+export default createStackNavigator(
+  {
+    // Name
+    Home: {
+      // Screen imported
+      screen: HomeScreen,
+      // navigationOptions for the screen
+      navigationOptions: {
+        header: null
+      }
+    },
+    // Name
+    Links: {
+      // Screen imported
+      screen: LinksScreen,
+      // navigationOptions for the screen
+      headerMode: 'screen',
+    },
+    // Name
+    Learn: {
+      // Screen imported
+      screen: LearnScreen,
+      // navigationOptions for the screen
+      headerMode: 'none',
+    },
+  },
+  { mode: 'modal' }
+);

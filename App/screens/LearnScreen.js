@@ -12,14 +12,14 @@ export default class LearnScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.textGetStarted}>
-            <Text  style={styles.h1}>If you want to leanr this topic, you should do the following things :</Text>
+            <Text  style={styles.h1}>If you want to learn this topic, you should do the following things :</Text>
             <Text style={styles.subtitle}>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030. OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
             </Text>
           </View>
- 
+
           <WebView
            source={{uri: 'https://www.youtube.com/embed/o08ykAqLOxk'}}
-           style={{width: 400, height: 400}} />
+           style={{width: "100%", height: 400}} />
         </ScrollView>
       </View>
     );

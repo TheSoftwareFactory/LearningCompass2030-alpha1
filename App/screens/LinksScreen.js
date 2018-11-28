@@ -2,26 +2,31 @@ import React from 'react';
 import {Image, Text, Platform, ScrollView, StyleSheet, TouchableOpacity, View, StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 
 export default class LinksScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Details',
-  };
+
+    /* Layout Configuration */
+    static navigationOptions = {
+      header: null,
+    };
 
   /* Body */
   render() {
     const {navigate} = this.props.navigation;
+    const { navigation } = this.props;
+    const name = navigation.getParam('construct', 'Title');
     return (
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.textGetStarted}>
-            <Text  style={styles.h1}>Learning</Text>
+            <Text  style={styles.h1}>{name}</Text>
             <Text style={styles.subtitle}>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030. OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
             </Text>
           </View>
           <View>
           <Button
+            style={styles.button}
             onPress={() => navigate('Learn', {name: 'heart'})}
             title="Learn More"
-            color="#841584"/>
+            />
           </View>
         </ScrollView>
       </View>
@@ -70,7 +75,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center'
   },
-  buttonContainer: {
-    margin: 20
+  button: {
+    margin: 20,
+    padding: 20,
+    color:"#841584",
   },
 });

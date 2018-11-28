@@ -52,4 +52,10 @@ export default createBottomTabNavigator(
               backgroundColor: Colors.tabBar,
           }
       }
-  });
+  },
+  {
+    header: {
+      visible: false
+    }
+  }
+);
