@@ -4,7 +4,7 @@ import { WebView } from 'react-native';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
-    headerMode: 'none',
+    header: null,
   };
 
   render() {

@@ -23,15 +23,22 @@ export default createStackNavigator(
       // Screen imported
       screen: LinksScreen,
       // navigationOptions for the screen
-      headerMode: 'screen',
+      navigationOptions: ({ navigation }) => ({
+        title: `${navigation.state.params.construct}`,
+      }),
     },
     // Name
     Learn: {
       // Screen imported
       screen: LearnScreen,
       // navigationOptions for the screen
-      headerMode: 'none',
-    },
+      navigationOptions: ({ navigation }) => ({
+        title: "Share",
+      }),
+        },
   },
-  { mode: 'modal' }
+  {
+  mode: 'modal',
+  initialRouteName: 'Home',
+ }
 );

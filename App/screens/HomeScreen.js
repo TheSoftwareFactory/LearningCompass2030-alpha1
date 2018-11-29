@@ -46,7 +46,9 @@ export default class HomeScreen extends React.Component {
     const {navigate} = this.props.navigation;
 
 
-     _onPetalPress = (petal) => {navigate('Links', { construct: 'Default' },);}
+     _onPetalPress = (petal) => {
+       navigate('Links',{ construct: petal });
+     }
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -121,7 +123,6 @@ export default class HomeScreen extends React.Component {
             <Svg.Path d="m51.1 50.6 51 7.46-11.3 27.1z" onPressIn={_onPetalPress}/>
            </Svg.G>
           </Svg>
-
           </View>
 
           <View style={styles.textGetStarted}>

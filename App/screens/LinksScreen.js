@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image, Text, Platform, ScrollView, StyleSheet, TouchableOpacity, View, StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
+import ItemComponent from '../components/ItemComponent';
 
 export default class LinksScreen extends React.Component {
 
@@ -17,16 +18,14 @@ export default class LinksScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.textGetStarted}>
-            <Text  style={styles.h1}>{name}</Text>
             <Text style={styles.subtitle}>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030. OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
             </Text>
           </View>
-          <View>
-          <Button
-            style={styles.button}
-            onPress={() => navigate('Learn', {name: 'heart'})}
-            title="Learn More"
-            />
+          <View style={styles.items}>
+          <ItemComponent style={styles.item} onPress={() => navigate('Learn', {name: 'heart'})}/>
+          <ItemComponent style={styles.item} onPress={() => navigate('Learn', {name: 'heart'})}/>
+          <ItemComponent style={styles.item} onPress={() => navigate('Learn', {name: 'heart'})}/>
+          <ItemComponent style={styles.item} onPress={() => navigate('Learn', {name: 'heart'})}/>
           </View>
         </ScrollView>
       </View>
@@ -48,6 +47,13 @@ const styles = StyleSheet.create({
     flex:1,
     width: "100%",
     alignItems: 'center',
+  },
+  items: {
+    margin: "5%",
+    alignItems: 'center',
+  },
+  item: {
+    marginTop:30,
   },
   contentContainer: {
     paddingTop: 30,
