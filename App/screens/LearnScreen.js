@@ -3,7 +3,7 @@ import {Image, Text, Platform, ScrollView, StyleSheet, TouchableOpacity, View, S
 
 export default class LearnScreen extends React.Component {
   static navigationOptions = {
-    title: 'Learn',
+    title: 'Introduction',
   };
 
   /* Body */
@@ -12,8 +12,8 @@ export default class LearnScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.textGetStarted}>
-            <Text  style={styles.h1}>If you want to learn this topic, you should do the following things :</Text>
-            <Text style={styles.subtitle}>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030. OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
+            <Text  style={styles.h1}>Introduction</Text>
+            <Text style={styles.subtitle}>Life satisfaction is the way in which people show their emotions, feelings and how they feel about their directions and options for the future. It is a measure of well-being assessed in terms of mood, satisfaction with relationships, achieved goals, self-concepts, and self-perceived ability to cope with one's daily life. Life satisfaction involves a favorable attitude towards one's life rather than an assessment of current feelings. Life satisfaction has been measured in relation to economic standing, degree of education, experiences, residence, among many other topics.
             </Text>
           </View>
 

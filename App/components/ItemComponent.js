@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
 import {Image, Text, Platform, NavigatorIOS, ScrollView, StyleSheet, TouchableOpacity, View, StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
+// withNavigation function to provide the navigation prop automatically
+import { withNavigation } from 'react-navigation';
 
-export default class ItemComponent extends React.Component {
+export class ItemComponent extends React.Component {
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
-        <View style={styles.container} >
-          <Text style={styles.h1}>Learning Compass</Text>
-          <Text style={styles.subtitle}>This application aims to build an understanding of the knowledge, skills, attitudes, and values necessary to shape the future. Choose a construct to develop by touching one of the petals of the flower.</Text>
-        </View>
+        <TouchableNativeFeedback onPress={() => navigate('Learn', {name: 'heart'})} background={TouchableNativeFeedback.SelectableBackground()}>
+          <View style={styles.container} >
+            <Text style={styles.h1}>Learning Compass</Text>
+            <Text style={styles.subtitle}>This application aims to build an understanding of the knowledge, skills, attitudes, and values necessary to shape the future. Choose a construct to develop by touching one of the petals of the flower.</Text>
+          </View>
+        </TouchableNativeFeedback>
+
     );
 
 
   }
 }
+
+export default withNavigation(ItemComponent);
 
 /* Style */
 const styles = StyleSheet.create({

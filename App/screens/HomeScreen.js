@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {Image, Text, Platform, NavigatorIOS, ScrollView, StyleSheet, TouchableOpacity, View, StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
+import {Image, Text, ToastAndroid, Platform, NavigatorIOS, ScrollView, StyleSheet, TouchableOpacity, View, StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import { WebBrowser } from 'expo';
-import { MonoText } from '../components/StyledText';
 import { Constants, Svg } from 'expo';
 
 export default class HomeScreen extends React.Component {
@@ -18,8 +17,9 @@ export default class HomeScreen extends React.Component {
 
    /* Data Structure */
   state = {
-     'satisfactionValue': ''
+     'satisfactionValue': '',
   }
+
   componentDidMount = () => {
     try {
       const value = AsyncStorage.getItem('satisfactionvalue');
@@ -44,11 +44,9 @@ export default class HomeScreen extends React.Component {
   /* Body */
   render() {
     const {navigate} = this.props.navigation;
+    _onPetalPress = (petalId,petalName) => {global.construct = petalId; navigate('Links',{ construct: petalName });}
+    _onPetalLongPress= (petal) => {Platform.OS === 'ios' ? true : ToastAndroid.show(petal, ToastAndroid.SHORT);}
 
-
-     _onPetalPress = (petal) => {
-       navigate('Links',{ construct: petal });
-     }
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -84,7 +82,7 @@ export default class HomeScreen extends React.Component {
            <Svg.Path d="m87 19.6c-2.3 0.714-4.05 1.3-6.38 2.58 0.425 1.08 1.06 1.77 1.81 2.77 2.2-1.01 4.4-2.02 6.6-3.03-0.624-0.662-1.28-2.24-2.03-2.32zm-2.33 1.32c0.594 0 1.38 0.599 1.38 1.05 0 0.905-1.4 1.41-2.21 0.796-0.749-0.567-0.173-1.85 0.83-1.85zm0.0442 0.5c-0.0763-0.118-0.326-0.0054-0.414 0.0834-0.382 0.912 1.08 0.615 0.191 1.05-0.149 0.223 0.62 0.107 0.654-0.242 0.0343-0.348-0.656-0.234-0.701-0.521-0.0233-0.151 0.353-0.244 0.27-0.373zm4.1 1.11c-0.0997-0.0995-5.88 2.5-6.14 2.76-0.0636 0.0635-0.552-0.464-1.09-1.17-0.534-0.709-1.02-1.24-1.07-1.18-0.126 0.125 1.76 2.71 1.98 2.71 0.0156 0 1.42-0.627 3.12-1.39 3.19-1.44 3.39-1.54 3.2-1.72zm-0.19 0.766c-0.172 0.0071-1.62 0.627-3.22 1.38l-2.91 1.36-0.538-0.587c-0.296-0.323-0.745-0.87-0.998-1.22-0.253-0.346-0.511-0.581-0.574-0.522 0.49 1.06 1.1 1.75 1.85 2.76 1.44-0.635 2.95-1.31 4.25-1.91 2.14-0.974 2.68-1.29 2.14-1.27z" fill="#fff" stroke-width=".215"/>
            <Svg.G>
             <Svg.Path d="m51 49.9s25.8 6.73 33.8-2.69c0 0-9.43-8.04-33.8 2.69z" fill="#55b2ae" stroke-width=".547"/>
-            <Svg.Path d="m52.4 49.8s16.1 17.3 26.6 14.1c0 0-3.21-10.5-26.6-14.1z" fill="#923953" stroke-width=".485"/>
+            <Svg.Path y="1" d="m52.4 49.8s16.1 17.3 26.6 14.1c0 0-3.21-10.5-26.6-14.1z" fill="#923953" stroke-width=".485"/>
             <Svg.Circle transform="rotate(265)" cx="-53.8" cy="89.6" r="5.47" fill="#55b2ae" stroke-width=".547"/>
             <Svg.Circle transform="rotate(-62)" cx="-19.4" cy="107" r="4.85" fill="#923953" stroke-width=".485"/>
            </Svg.G>
@@ -110,17 +108,17 @@ export default class HomeScreen extends React.Component {
             <Svg.Path d="m12 64.7c0.335-0.34-0.359-0.456-2.33-0.388-1.9 0.0653-2.45 0.346-1.09 0.596 0.996-0.129 3.17 0.0444 3.42-0.208z"/>
            </Svg.G>
            <Svg.G fill="none">
-            <Svg.Path d="m50 50 13.4 50.5-29.3-0.314z" onPressIn={() => _onPetalPress('Life Statifaction')}/>
-            <Svg.Path d="m50 51.1-15.6 49.1-25-15.5z" onPressIn={_onPetalPress}/>
-            <Svg.Path d="m50.5 49.9-40.8 33.5-11.5-27.7z" onPressIn={_onPetalPress}/>
-            <Svg.Path d="m49.5 51-51.3 4.74 4.62-29z" onPressIn={_onPetalPress}/>
-            <Svg.Path d="m49.4 51.6-46.6-24.8 21.1-21.3z" onPressIn={_onPetalPress}/>
-            <Svg.Path d="m50.6 50.6 39.3 35.2-25.6 15.6z" onPressIn={_onPetalPress}/>
-            <Svg.Path d="m49 50.4-26.7-44.1 28.2-8.51z" onPressIn={_onPetalPress}/>
-            <Svg.Path d="m49 50.9 1.54-52.8 28.4 9.47z" onPressIn={_onPetalPress}/>
-            <Svg.Path d="m50.1 50.3 28.9-42.7 19.5 22z" onPressIn={_onPetalPress}/>
-            <Svg.Path d="m50 50 48.2-21.6 3.87 29.7z" onPressIn={_onPetalPress}/>
-            <Svg.Path d="m51.1 50.6 51 7.46-11.3 27.1z" onPressIn={_onPetalPress}/>
+            <Svg.Path d="m50 50 13.4 50.5-29.3-0.314z" onPress={() => _onPetalPress('LifeSatisfaction','Life Satisfaction')} onLongPress={() => _onPetalLongPress('Life Statifaction')} />
+            <Svg.Path d="m50 51.1-15.6 49.1-25-15.5z" onPress={() => _onPetalPress('Health','Health')} onLongPress={() => _onPetalLongPress('Health')}/>
+            <Svg.Path d="m50.5 49.9-40.8 33.5-11.5-27.7z" onPress={() => _onPetalPress('CivicEngagement','Civic Engagement')} onLongPress={() => _onPetalLongPress('Civic Engagement')}/>
+            <Svg.Path d="m49.5 51-51.3 4.74 4.62-29z" onPress={() => _onPetalPress('Environment','Environment')} onLongPress={() => _onPetalLongPress('Environment')}/>
+            <Svg.Path d="m49.4 51.6-46.6-24.8 21.1-21.3z" onPress={() => _onPetalPress('Education','Education')} onLongPress={() => _onPetalLongPress('Education')}/>
+            <Svg.Path d="m49 50.4-26.7-44.1 28.2-8.51z" onPress={() => _onPetalPress('Community','Community')} onLongPress={() => _onPetalLongPress('Community')}/>
+            <Svg.Path d="m49 50.9 1.54-52.8 28.4 9.47z" onPress={() => _onPetalPress('Jobs','Jobs')} onLongPress={() => _onPetalLongPress('Jobs')}/>
+            <Svg.Path d="m50.1 50.3 28.9-42.7 19.5 22z" onPress={() => _onPetalPress('Income','Income')} onLongPress={() => _onPetalLongPress('Income')}/>
+            <Svg.Path d="m50 50 48.2-21.6 3.87 29.7z" onPress={() => _onPetalPress('Housing','Housing')} onLongPress={() => _onPetalLongPress('Housing')}/>
+            <Svg.Path d="m51.1 50.6 51 7.46-11.3 27.1z" onPress={() => _onPetalPress('WorkLifeBalance','Work-Life Balance')} onLongPress={() => _onPetalLongPress('Work-Life Balance')}/>
+            <Svg.Path d="m50.6 50.6 39.3 35.2-25.6 15.6z" onPress={() => _onPetalPress('Safety','Safety')} onLongPress={() => _onPetalLongPress('Safety')}/>
            </Svg.G>
           </Svg>
           </View>

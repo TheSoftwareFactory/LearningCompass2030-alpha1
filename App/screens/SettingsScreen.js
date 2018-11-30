@@ -8,9 +8,10 @@ export default class SettingsScreen extends React.Component {
   };
 
   render() {
+    const url = `https://tlk.io/OECD_${global.construct}`;
     return (
       <WebView
-        source={{uri: 'https://www.quora.com/What-are-OECD-countries'}}
+        source={{uri: url}}
         style={{flex: 1}}
       />
     );

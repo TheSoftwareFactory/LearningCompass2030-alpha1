@@ -5,27 +5,34 @@ import ItemComponent from '../components/ItemComponent';
 export default class LinksScreen extends React.Component {
 
     /* Layout Configuration */
-    static navigationOptions = {
-      header: null,
-    };
+    static navigationOptions = {header: null,};
 
   /* Body */
   render() {
     const {navigate} = this.props.navigation;
     const { navigation } = this.props;
-    const name = navigation.getParam('construct', 'Title');
+    const name = navigation.getParam('construct', 'ERROR');
+    var db = require('../assets/data.json');
+
+    var contents = db[global.construct]['items'].map(function (item,i) {
+     return (
+       <TouchableNativeFeedback key={i} onPress={() => navigate('Learn', {name: 'heart'})} background={TouchableNativeFeedback.SelectableBackground()}>
+         <View style={styles.itemContainer} >
+           <Text style={styles.h1}>{item.title}</Text>
+           <Text style={styles.subtitle}>{item.subtitle}</Text>
+         </View>
+       </TouchableNativeFeedback>
+     );
+    });
+
     return (
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.textGetStarted}>
-            <Text style={styles.subtitle}>OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030. OECD Education 2030 aims to build a common understanding of the knowledge, skills, attitudes and values necessary to shape the future towards 2030.
-            </Text>
+            <Text style={styles.subtitle}>{db[global.construct]['subtitle']}</Text>
           </View>
           <View style={styles.items}>
-          <ItemComponent style={styles.item} onPress={() => navigate('Learn', {name: 'heart'})}/>
-          <ItemComponent style={styles.item} onPress={() => navigate('Learn', {name: 'heart'})}/>
-          <ItemComponent style={styles.item} onPress={() => navigate('Learn', {name: 'heart'})}/>
-          <ItemComponent style={styles.item} onPress={() => navigate('Learn', {name: 'heart'})}/>
+          {contents}
           </View>
         </ScrollView>
       </View>
@@ -43,20 +50,25 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center'
   },
+  itemContainer: {
+    height:200,
+    width:"100%",
+    backgroundColor: '#96dcff',
+    borderRadius: 10,
+    margin: "5%",
+    padding: 10,
+    overflow: 'hidden',
+    justifyContent:'center'
+  },
   getStartedContainer: {
     flex:1,
     width: "100%",
     alignItems: 'center',
   },
   items: {
-    margin: "5%",
+    marginRight: "5%",
+    marginLeft: "5%",
     alignItems: 'center',
-  },
-  item: {
-    marginTop:30,
-  },
-  contentContainer: {
-    paddingTop: 30,
   },
   coverGetStarted: {
     marginTop:30,
@@ -68,18 +80,19 @@ const styles = StyleSheet.create({
     fontFamily: "noto-sans-light",
     color:'#fff',
     alignItems: 'center',
-    margin: 20,
+    margin: 10,
   },
   h1: {
     fontFamily: "noto-sans-light",
     color:'#212121',
     fontSize: 40,
+    textAlign: 'center',
   },
   subtitle: {
     fontFamily: "noto-sans-thin",
     color:'#212121',
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   button: {
     margin: 20,

@@ -10,7 +10,9 @@ import Colors from '../constants/Colors';
 import LearnScreen from '../screens/LearnScreen';
 
 const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+  Links: {
+    screen: LinksScreen,
+    },
 }
 );
 
@@ -40,7 +42,9 @@ SettingsStack.navigationOptions = {
 
 export default createBottomTabNavigator(
   {
-  LinksStack,
+  LinksStack:{
+    screen: LinksStack,
+  },
   SettingsStack,
   },
   {

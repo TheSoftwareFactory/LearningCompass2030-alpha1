@@ -22,7 +22,7 @@ export default createStackNavigator(
     Links: {
       // Screen imported
       screen: LinksScreen,
-      // navigationOptions for the screen
+      // navigationOptions for the screen ({ navigation }) => (`${navigation.state.params.construct}`),
       navigationOptions: ({ navigation }) => ({
         title: `${navigation.state.params.construct}`,
       }),
@@ -33,12 +33,8 @@ export default createStackNavigator(
       screen: LearnScreen,
       // navigationOptions for the screen
       navigationOptions: ({ navigation }) => ({
-        title: "Share",
+        title: "Introduction",
       }),
         },
   },
-  {
-  mode: 'modal',
-  initialRouteName: 'Home',
- }
 );
