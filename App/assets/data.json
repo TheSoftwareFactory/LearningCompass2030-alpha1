@@ -34,7 +34,7 @@
     "subtitle": "Life satisfaction is the way in which people show their emotions, feelings and how they feel about their directions and options for the future. It is a measure of well-being. ",
     "items": [
       { "title": "Introduction", "subtitle": "This is an simple introduction." },
-      { "title": "Outlook on life", "subtitle": "A person's outlook on life can also influence his or her perception of life satisfaction." },
+      { "title": "Learning Topics", "subtitle": "A person's outlook on life can also influence his or her perception of life satisfaction." },
       { "title": "Life events", "subtitle": "This is not an simple introduction." },
       { "title": "Item 4", "subtitle": "This is not an simple introduction." }
     ]
@@ -108,5 +108,5 @@
       { "title": "Life events", "subtitle": "This is not an simple introduction." },
       { "title": "Item 4", "subtitle": "This is not an simple introduction." }
     ]
-  },
+  }
 }

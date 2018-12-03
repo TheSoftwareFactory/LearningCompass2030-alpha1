@@ -6,9 +6,18 @@ import { createSwitchNavigator, createStackNavigator, createBottomTabNavigator }
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from './LinksNavigator';
 import LearnScreen from '../screens/LearnScreen';
+import IntroScreen from '../screens/IntroScreen';
 
 export default createStackNavigator(
   {
+    Intro: {
+      // Screen imported
+      screen: IntroScreen,
+      // navigationOptions for the screen
+      navigationOptions: {
+        header: null
+      }
+    },
     // Name
     Home: {
       // Screen imported
@@ -37,4 +46,5 @@ export default createStackNavigator(
       }),
         },
   },
-);
+)
+;

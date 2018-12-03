@@ -10,7 +10,6 @@ export default class HomeScreen extends React.Component {
     headerMode: 'none',
   };
 
-
   /* Scripts */
   _onPressButton() {WebBrowser.openBrowserAsync('http://www.oecd.org/');}
    /*_onPetalPress() {Platform.OS === 'ios' ? this.props.navigator.push('Links', {name: 'heart'}) : this.props.navigation('Links', {name: 'heart'});} */
