@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Text, Platform, ScrollView, StyleSheet, TouchableOpacity, View, 
+import {Image, Text, List, ListItem, Platform, ScrollView, StyleSheet, TouchableOpacity, View, 
 StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, WebView, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 
 export default class IntroScreen extends React.Component {
@@ -7,7 +7,8 @@ export default class IntroScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      stage: 0,  };
+      stage: 0, 
+      pressed: [false, false,false,false,false,false,false,false,false,false,false] };
   }
   
   static navigationOptions = {
@@ -18,11 +19,19 @@ export default class IntroScreen extends React.Component {
   render() {
     const {navigate} = this.props.navigation;
     const {dismiss} = this.props.navigation;
+    const color1 = '#184726';
+    const color2 = '#5f8c6c';
     goNext = () => { this.setState (previousState => (
       { stage: previousState.stage + 1 }
     )) }
     goBack = () => { this.setState (previousState => (
       { stage: previousState.stage - 1 }
+    )) }
+    changeColor = (num) => { 
+      tem_state = this.state.pressed;
+      tem_state[num] = !this.state.pressed[num];
+      this.setState (previousState => (
+      { pressed: tem_state }
     )) }
     goToHome = () => { dismiss('IntroScreen'); navigate('Home'); }
 
@@ -262,6 +271,88 @@ in order to facilitate their integration on the job market. </Text>
 
     case 6: return (
       <View style={styles.container}>
+       <ScrollView>
+       <View style={styles.items}>
+          <Text style={styles.head}> What is your interests </Text>
+            <Text style={styles.contents}> What is your interests ? Your choices used for recommendation and data analysis during your usage of this app. </Text>
+          </View>
+           <TouchableOpacity onPress={() => changeColor(0) } > 
+              <View style={   {  alignItems : 'center', backgroundColor : this.state.pressed[0] ? color2 : color1, marginRight: "5%", marginLeft: "5%", margin : 10}  }>
+                <Text  style={styles.subtitle}> Sports </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => changeColor(1)}  > 
+              <View style={  {  alignItems : 'center', backgroundColor : this.state.pressed[1] ? color2 : color1, marginRight: "5%", marginLeft: "5%", margin : 10}  }>
+                <Text  style={styles.subtitle}> News </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => changeColor(2)} > 
+              <View style={  {  alignItems : 'center', backgroundColor : this.state.pressed[2] ? color2 : color1, marginRight: "5%", marginLeft: "5%", margin : 10}   }>
+                <Text  style={styles.subtitle}> Entertainment </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => changeColor(3)} > 
+              <View style={  {  alignItems : 'center', backgroundColor : this.state.pressed[3] ? color2 : color1, marginRight: "5%", marginLeft: "5%", margin : 10}  }>
+                <Text  style={styles.subtitle}> Lifestyle </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => changeColor(4)} > 
+              <View style={  {  alignItems : 'center', backgroundColor : this.state.pressed[4] ? color2 : color1, marginRight: "5%", marginLeft: "5%", margin : 10}  }>
+                <Text  style={styles.subtitle}> Music </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => changeColor(5)} > 
+              <View style={  {  alignItems : 'center', backgroundColor : this.state.pressed[5] ? color2 : color1, marginRight: "5%", marginLeft: "5%", margin : 10}  }>
+                <Text  style={styles.subtitle}> Science </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => changeColor(6)} > 
+              <View style={  {  alignItems : 'center', backgroundColor : this.state.pressed[6] ? color2 : color1, marginRight: "5%", marginLeft: "5%", margin : 10}  }>
+                <Text  style={styles.subtitle}> Technology </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => changeColor(7)} > 
+              <View style={  {  alignItems : 'center', backgroundColor : this.state.pressed[7] ? color2 : color1, marginRight: "5%", marginLeft: "5%", margin : 10}  }>
+                <Text  style={styles.subtitle}> Gaming </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => changeColor(8)} > 
+              <View style={  {  alignItems : 'center', backgroundColor : this.state.pressed[8] ? color2 : color1, marginRight: "5%", marginLeft: "5%", margin : 10}  }>
+                <Text  style={styles.subtitle}> Art </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => changeColor(9)} > 
+              <View style={  {  alignItems : 'center', backgroundColor : this.state.pressed[9] ? color2 : color1, marginRight: "5%", marginLeft: "5%", margin : 10}  }>
+                <Text  style={styles.subtitle}> Culture </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => changeColor(10)} > 
+              <View style={  {  alignItems : 'center', backgroundColor : this.state.pressed[10] ? color2 : color1, marginRight: "5%", marginLeft: "5%", margin : 10}  }>
+                <Text  style={styles.subtitle}> Politics </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => changeColor(11)} > 
+              <View style={  {  alignItems : 'center', backgroundColor : this.state.pressed[11] ? color2 : color1, marginRight: "5%", marginLeft: "5%", margin : 10}  }>
+                <Text  style={styles.subtitle}> Game </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => goNext()} > 
+              <View style={styles.bottomTouch} >
+                <Text  style={styles.subtitle}> Submit and Next </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => goBack()} > 
+              <View style={styles.bottomTouch} >
+                 <Text  style={styles.subtitle}> Back </Text>
+               </View>
+           </TouchableOpacity>
+           
+        </ScrollView>
+      </View>
+    );
+
+    case 7: return (
+      <View style={styles.container}>
         <ScrollView>
            <View style={styles.items}>
              <Text style={styles.subtitle}> Introduction Finished </Text>
@@ -272,8 +363,8 @@ in order to facilitate their integration on the job market. </Text>
                </View>
            </TouchableOpacity>
            <TouchableOpacity onPress={() => goBack()} > 
-              <View style={styles.bottomTouch} >
-                 <Text  style={styles.subtitle}> Back </Text>
+              <View style={styles.bottomTouch}  >
+                 <Text style={styles.subtitle}> Back </Text>
                </View>
            </TouchableOpacity>
         </ScrollView>

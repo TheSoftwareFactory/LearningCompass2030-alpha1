@@ -18,13 +18,13 @@ export default class CreditScreen extends React.Component {
           <TouchableOpacity onPress={() => jump()} > 
               <View style={styles.bottomTouch} >
                  <Text  style={styles.head}> {"\n"} PSY Test {"\n"} </Text>
-                 <Text  style={styles.contents}> {"\n"} You can make a psychological test to help find your interest. {"\n"} </Text>
+                 <Text  style={styles.contents}> {"\n"} You can make a psychological test to help find your interests. {"\n"} </Text>
                </View>
            </TouchableOpacity>
            <TouchableOpacity onPress={() => jump()} > 
               <View style={styles.bottomTouch} >
                  <Text  style={styles.head}> {"\n"} Statistics {"\n"} </Text>
-                 <Text  style={styles.contents}> {"\n"} See the report and statistics of each of the 11 field. {"\n"} </Text>
+                 <Text  style={styles.contents}> {"\n"} See the report and statistics of each of the 11 fields. {"\n"} </Text>
                </View>
            </TouchableOpacity>
            <TouchableOpacity onPress={() => jump()} > 
@@ -35,8 +35,8 @@ export default class CreditScreen extends React.Component {
            </TouchableOpacity>
            <TouchableOpacity onPress={() => jump()} > 
               <View style={styles.bottomTouch} >
-                 <Text  style={styles.head}> {"\n"} Others' experience {"\n"} </Text>
-                 <Text  style={styles.contents}> {"\n"} See students' narratives and suggestions of how they develop themselvs on these 11 fields. {"\n"} </Text>
+                 <Text  style={styles.head}> {"\n"} Formal suggestions {"\n"} </Text>
+                 <Text  style={styles.contents}> {"\n"} See suggestions from authorities, scientists and researchers about finding your own areas and topics to learn.  {"\n"} </Text>
                </View>
            </TouchableOpacity>
           </ScrollView>
