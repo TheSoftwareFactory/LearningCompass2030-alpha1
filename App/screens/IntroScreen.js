@@ -325,7 +325,7 @@ const styles = StyleSheet.create({
     margin : 10,
   },
   contents: {
-    fontFamily: "serif",
+    fontFamily: "noto-sans-thin",
     color: '#b3d5d6',
     fontSize: 20,
     textAlign: 'center',

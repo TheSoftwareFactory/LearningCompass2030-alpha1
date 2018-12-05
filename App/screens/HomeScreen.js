@@ -44,6 +44,7 @@ export default class HomeScreen extends React.Component {
   render() {
     const {navigate} = this.props.navigation;
     _onPetalPress = (petalId,petalName) => {global.construct = petalId; navigate('Links',{ construct: petalName });}
+    _toScreen = (screen) => { navigate(screen,{  });}
     _onPetalLongPress= (petal) => {Platform.OS === 'ios' ? true : ToastAndroid.show(petal, ToastAndroid.SHORT);}
 
     return (
@@ -127,6 +128,17 @@ export default class HomeScreen extends React.Component {
             <Text style={styles.subtitle}>This application aims to build an understanding of the knowledge, skills, attitudes, and values necessary to shape the future. Choose a construct to develop by touching one of the petals of the flower.
             </Text>
           </View>
+
+          <TouchableOpacity onPress={() => _toScreen('Credit')} > 
+              <View style={styles.bottomTouch} >
+                <Text  style={styles.subtitle2}> Credit Page </Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => _toScreen('DoNotKnow')} > 
+              <View style={styles.bottomTouch} >
+                <Text  style={styles.subtitle2}> Do not know where to start ? </Text>
+              </View>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     );
@@ -174,6 +186,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center'
   },
+  subtitle2: {
+    fontFamily: "noto-sans-thin",
+    color:'#fff',
+    fontSize: 20,
+    textAlign: 'center',
+    margin : 10,
+  },
+  bottomTouch : {
+    alignItems : 'center',
+    backgroundColor : '#915b45',
+    marginRight: "5%",
+    marginLeft: "5%",
+    margin : 10,
+ },
   buttonContainer: {
     margin: 20
   },
