@@ -1,6 +1,5 @@
 import React from 'react';
 import {Image, Text, Platform, ScrollView, StyleSheet, TouchableOpacity, View, StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
-import ItemComponent from '../components/ItemComponent';
 
 export default class LinksScreen extends React.Component {
 
@@ -16,10 +15,10 @@ export default class LinksScreen extends React.Component {
 
     var contents = db[global.construct]['items'].map(function (item,i) {
      return (
-       <TouchableNativeFeedback key={i} onPress={() => navigate('Learn', {name: 'heart'})} background={TouchableNativeFeedback.SelectableBackground()}>
-         <View style={styles.itemContainer} >
-           <Text style={styles.h1}>{item.title}</Text>
-           <Text style={styles.subtitle}>{item.subtitle}</Text>
+       <TouchableNativeFeedback key={i} onPress={() => navigate('Learn', {id: i})} background={TouchableNativeFeedback.SelectableBackground()}>
+         <View style={StyleSheet.flatten([styles.itemContainer,{backgroundColor: global.color,}])} >
+           <Text style={styles.h2}>{item.title}</Text>
+           <Text style={styles.description}>{item.subtitle}</Text>
          </View>
        </TouchableNativeFeedback>
      );
@@ -51,14 +50,12 @@ const styles = StyleSheet.create({
     justifyContent:'center'
   },
   itemContainer: {
-    height:200,
     width:"100%",
-    backgroundColor: '#96dcff',
+    height:300,
     borderRadius: 10,
     margin: "5%",
-    padding: 10,
-    overflow: 'hidden',
-    justifyContent:'center'
+    padding: 50,
+    justifyContent:'center',
   },
   getStartedContainer: {
     flex:1,
@@ -82,15 +79,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
   },
-  h1: {
+  h2: {
     fontFamily: "noto-sans-light",
-    color:'#212121',
+    color:'#fff',
     fontSize: 40,
     textAlign: 'center',
   },
   subtitle: {
     fontFamily: "noto-sans-thin",
     color:'#212121',
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  description: {
+    fontFamily: "noto-sans-thin",
+    color:'#fff',
     fontSize: 20,
     textAlign: 'center',
   },

@@ -44,7 +44,7 @@ export default createStackNavigator(
       screen: LearnScreen,
       // navigationOptions for the screen
       navigationOptions: ({ navigation }) => ({
-        title: "Introduction",
+        title: "",
       }),
         },
       Credit: {
