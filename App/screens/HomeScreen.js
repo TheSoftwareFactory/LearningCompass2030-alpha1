@@ -6,10 +6,12 @@ import { Constants, Svg } from 'expo';
 
 export default class HomeScreen extends React.Component {
 
-  constructor(props: Object): void {
+  constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
+      interests: 'Recommended Start Point',
+      boollist: 'hi'
     };
   }
 
@@ -54,10 +56,35 @@ export default class HomeScreen extends React.Component {
   /* Body */
   render() {
     const {navigate} = this.props.navigation;
+    
+
     _onPetalPress = (petalId,petalName,color) => {global.construct = petalId; global.color = color; navigate('Links',{ construct: petalName });}
     _toScreen = (screen) => { navigate(screen,{  });}
     _onPetalLongPress= (petal) => {Platform.OS === 'ios' ? true : ToastAndroid.show(petal, ToastAndroid.SHORT);}
-
+    updateInterest = () => {
+      if (this.state.interests != 'Recommended Start Point') {
+        this.setState (previousState => (
+          { interests: 'Recommended Start Point'  }
+        ))
+      } else {
+      AsyncStorage.getItem('Interests').then((value) => {
+        this.setState (previousState => (
+          { boollist: value  }
+        )) 
+        var rcm = 'hi';
+        switch (this.state.boollist) {
+        case 'true,false,false,false,false,false,false,false,false,false,false' : rcm = 'Education'; break;
+        case 'true,true,false,false,false,false,false,false,false,false,false' : rcm ='Community'; break;
+        default : rcm ='Health'; break;
+      }
+        this.setState (previousState => (
+        { interests: rcm  }
+      )) 
+      }) 
+      
+      }
+    }
+ 
     if (this.state.isLoading) {
       return (
             <View style={styles.container}>
@@ -180,16 +207,24 @@ export default class HomeScreen extends React.Component {
       </Text>
       </View>
 
-      <TouchableOpacity onPress={() => _toScreen('Credit')} >
-      <View style={styles.bottomTouch} >
-      <Text  style={styles.subtitle2}> Credit Page </Text>
-      </View>
-      </TouchableOpacity>
       <TouchableOpacity onPress={() => _toScreen('DoNotKnow')} >
       <View style={styles.bottomTouch} >
       <Text  style={styles.subtitle2}> Do not know where to start ? </Text>
       </View>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => _toScreen('Credit')} >
+      <View style={styles.bottomTouch} >
+      <Text  style={styles.subtitle2}> Credit Page </Text>
+      </View>
+      </TouchableOpacity>
+      
+      <TouchableOpacity onPress={() => updateInterest() } >
+      <View style={styles.bottomTouch}   >
+      <Text  style={styles.subtitle2}> {this.state.interests}  </Text>
+      </View>
+      </TouchableOpacity>
+       
       </ScrollView>
       </View>
     );

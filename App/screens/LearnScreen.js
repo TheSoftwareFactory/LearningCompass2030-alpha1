@@ -39,6 +39,7 @@ export default class LearnScreen extends React.Component {
          default: return (<Text key={i} style={styles.subtitle}>Data loading error.</Text>); // TODO : catch to error server
        }
      });
+     
      _check = () => {
        AsyncStorage.getItem(global.construct+'Val')
        .then((value) => {
@@ -52,6 +53,7 @@ export default class LearnScreen extends React.Component {
          })
        })
      }
+
      _unCheck = () => {
        AsyncStorage.getItem(global.construct+'Val')
        .then((value) => {
