@@ -11,7 +11,8 @@ export default class HomeScreen extends React.Component {
     this.state = {
       isLoading: true,
       interests: 'Recommended Start Point',
-      boollist: 'hi'
+      boollist: 'hi',
+      credit: false,
     };
   }
 
@@ -56,10 +57,11 @@ export default class HomeScreen extends React.Component {
   /* Body */
   render() {
     const {navigate} = this.props.navigation;
-    
-
+    var db = require('../assets/data.json');
+    var creditPage = db["CreditPage"];
     _onPetalPress = (petalId,petalName,color) => {global.construct = petalId; global.color = color; navigate('Links',{ construct: petalName });}
     _toScreen = (screen) => { navigate(screen,{  });}
+    _showCredit = () => { this.setState (previousState => ({ credit: !previousState.credit } )) }
     _onPetalLongPress= (petal) => {Platform.OS === 'ios' ? true : ToastAndroid.show(petal, ToastAndroid.SHORT);}
     updateInterest = () => {
       if (this.state.interests != 'Recommended Start Point') {
@@ -209,15 +211,20 @@ export default class HomeScreen extends React.Component {
 
       <TouchableOpacity onPress={() => _toScreen('DoNotKnow')} >
       <View style={styles.bottomTouch} >
-      <Text  style={styles.subtitle2}> Do not know where to start ? </Text>
+      <Text  style={styles.subtitle2}> More About the Background </Text>
       </View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => _toScreen('Credit')} >
-      <View style={styles.bottomTouch} >
-      <Text  style={styles.subtitle2}> Credit Page </Text>
+      
+
+      <TouchableOpacity onPress={() => _showCredit()}>
+      <View style={styles.bottomTouch}>
+      <Text  style={styles.subtitle2}> Credit Information </Text>
       </View>
       </TouchableOpacity>
+     
+      { this.state.credit ? <Text  style={ {fontFamily: "noto-sans-thin", margin : 5}}> {creditPage} </Text> : null }    
+      
       
       <TouchableOpacity onPress={() => updateInterest() } >
       <View style={styles.bottomTouch}   >

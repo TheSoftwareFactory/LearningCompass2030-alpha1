@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+body {
+    background-color:black;
+}
+
+h1 {
+    color:whitesmoke;
+    text-shadow: 2px 2px rgb(95, 93, 93);
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 55px;
+}
+
+table, tr {
+    height: 100px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+td {
+    color:white;
+    padding: 10px;
+    font-size: 22px;
+    font-family: Arial, sans-serif;
+}
+
+button {
+    background-color:blue; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    margin: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    cursor:pointer;
+}
+
+button:active{
+    background:rgb(53, 134, 74);
+}
+
+button:focus{
+    outline: none;
+    background:rgb(53, 134, 74);
+}
+
+
+</style>
+</head>
+
+
+<body>
+<h1> Undergraduate Programs </h1>
+<div style = "background-color:tan;" > <br><br><br>
+
+<table>
+<tr> <td colspan="5" id="MajorTitles" style="background-color:black; color:white; font-size: 40px; width: 1200px;"> Majors </td> </tr>
+
+<tr>
+    <td colspan="5" style="background-color:rgb(215, 233, 173);">  
+    <button onclick = "DSMF(this.innerHTML)" > Data Science and Mathematical Finance </button>
+    <button onclick = "LawsDS(this.innerHTML)" > Data Science and Laws </button> 
+    </td>
+</tr>
+
+<tr style="height: 200px;">
+    <td rowspan="2" id = "MajorName" style = "background-color:rgb(85, 81, 81); color:white; width: 150px;" > Year 1 </td>
+    <td id = "S1C1" style = "background-color: brown; "> </td>
+    <td id = "S1C2" style = "background-color:rgb(96, 50, 114); "> </td>
+    <td id = "S1C3" style = "background-color:rgb(209, 191, 25); ">  </td>
+    <td id = "S1C4" style = "background-color:rgb(116, 62, 18); "> </td>
+</tr>
+<tr style="height: 200px;">
+        <td id = "S2C1" style = "background-color:rgb(62, 97, 192)">   </td>
+        <td id = "S2C2" style = "background-color:darkorange">  </td>
+        <td id = "S2C3" style = "background-color:rgb(42, 148, 74)">   </td>
+        <td id = "S2C4" style = "background-color:rgb(175, 30, 115)">  </td>
+</tr>
+<tr style="height: 200px;">
+        <td rowspan="2" id = "MajorName" style = "background-color:rgb(85, 81, 81); color:white; width: 150px;" > Year 2 </td>
+        <td id = "S3C1" style = "background-color: brown"> </td>
+        <td id = "S3C2" style = "background-color:rgb(96, 50, 114)"> </td>
+        <td id = "S3C3" style = "background-color:rgb(209, 191, 25)">  </td>
+        <td id = "S3C4" style = "background-color:rgb(116, 62, 18)"> </td>
+    </tr>
+    <tr style="height: 200px;">
+            <td id = "S4C1" style = "background-color:rgb(62, 97, 192)">   </td>
+            <td id = "S4C2" style = "background-color:darkorange">  </td>
+            <td id = "S4C3" style = "background-color:rgb(42, 148, 74)">   </td>
+            <td id = "S4C4" style = "background-color:rgb(175, 30, 115)">  </td>
+    </tr>
+<tr style="height: 200px;">
+    <td rowspan="2" id = "MajorName" style = "background-color:rgb(85, 81, 81); color:white; width: 150px;" > Year 3 </td>
+    <td id = "S5C1" style = "background-color: brown"> </td>
+    <td id = "S5C2" style = "background-color:rgb(96, 50, 114)"> </td>
+    <td id = "S5C3" style = "background-color:rgb(209, 191, 25)">  </td>
+    <td id = "S5C4" style = "background-color:rgb(116, 62, 18)"> </td>
+</tr>
+<tr style="height: 200px;">
+    <td id = "S6C1" style = "background-color:rgb(62, 97, 192)">   </td>
+    <td id = "S6C2" style = "background-color:darkorange">  </td>
+    <td id = "S6C3" style = "background-color:rgb(42, 148, 74)">   </td>
+    <td id = "S6C4" style = "background-color:rgb(175, 30, 115)">  </td>
+</tr>
+        
+    
+</table> <br><br><br>
+</div>
+
+<script>
+
+function DSMF(innerNode) {
+
+    document.getElementById('MajorTitles').innerHTML=innerNode;
+
+    document.getElementById('S1C1').innerHTML= ' Relational Databases <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S1C2').innerHTML= ' Logic <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S1C3').innerHTML= ' Introductory Mathematical Statistics <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S1C4').innerHTML= ' Derivatives <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    
+    document.getElementById('S2C1').innerHTML= ' Data Mining  <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S2C2').innerHTML= ' Artificial Intelligence <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S2C3').innerHTML= ' Introduction to Stochastic Processes <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S2C4').innerHTML= ' Advanced Applied Mathematics 1 <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    
+    document.getElementById('S3C1').innerHTML= ' Data Wrangling <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S3C2').innerHTML= ' Statictical Machine Learning <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S3C3').innerHTML= ' Probability Modelling with Applications  <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S3C4').innerHTML= ' Advanced Analysis 1: Metric Spaces and Applications <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    
+    document.getElementById('S4C1').innerHTML= ' Document Analysis <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S4C2').innerHTML= ' Neural Networks and Deep Learning <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S4C3').innerHTML= ' Stochastic Modelling <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S4C4').innerHTML= ' Continuous Time Finance<br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    
+    document.getElementById('S5C1').innerHTML= ' Advanced Statistical Machine Learning <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S5C2').innerHTML= ' Mathematics of Finance <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S5C3').innerHTML= ' Research Project and Experiental Practice <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S5C4').innerHTML= ' Research Project and Experiental Practice <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    
+    document.getElementById('S6C1').innerHTML= ' Advanced Artificial Intelligence <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S6C2').innerHTML= ' Elective Course <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S6C3').innerHTML= ' Research Project and Experiental Practicet <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S6C4').innerHTML= ' Research Project and Experiental Practice <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    
+}
+
+function LawsDS(innerNode) {
+
+    document.getElementById('MajorTitles').innerHTML=innerNode;
+
+    document.getElementById('S1C1').innerHTML= ' Logic <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S1C2').innerHTML= ' National Public Law <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S1C3').innerHTML= ' Criminal Law and Procedure <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S1C4').innerHTML= ' Corporations Law <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    
+    document.getElementById('S2C1').innerHTML= ' Data Mining  <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S2C2').innerHTML= ' Artificial Intelligence <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S2C3').innerHTML= ' International Law <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S2C4').innerHTML= ' Legal Theory <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    
+    document.getElementById('S3C1').innerHTML= ' Data Wrangling <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S3C2').innerHTML= ' Statictical Machine Learning <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S3C3').innerHTML= ' Commonwealth Constitutional Law  <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S3C4').innerHTML= ' Administrative Law <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    
+    document.getElementById('S4C1').innerHTML= ' Document Analysis <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S4C2').innerHTML= ' Neural Networks and Deep Learning <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S4C3').innerHTML= ' Property <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S4C4').innerHTML= ' Equity and Trusts <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    
+    document.getElementById('S5C1').innerHTML= ' Advanced Statistical Machine Learning <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S5C2').innerHTML= ' Litigation and Dispute Management <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S5C3').innerHTML= ' Research Project and Experiental Practice <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S5C4').innerHTML= ' Research Project and Experiental Practice <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    
+    document.getElementById('S6C1').innerHTML= ' Advanced Artificial Intelligence <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S6C2').innerHTML= ' Evidence <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S6C3').innerHTML= ' Research Project and Experiental Practice <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+    document.getElementById('S6C4').innerHTML= ' Research Project and Experiental Practice <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+
+}
+
+function NEW(innerNode) {
+
+document.getElementById('MajorTitles').innerHTML=innerNode;
+
+document.getElementById('S1C1').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S1C2').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S1C3').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S1C4').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+
+document.getElementById('S2C1').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S2C2').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S2C3').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S2C4').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+
+document.getElementById('S3C1').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S3C2').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S3C3').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S3C4').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+
+document.getElementById('S4C1').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S4C2').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S4C3').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S4C4').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+
+document.getElementById('S5C1').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S5C2').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S5C3').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S5C4').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+
+document.getElementById('S6C1').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S6C2').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S6C3').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+document.getElementById('S6C4').innerHTML= ' <br><br> <span style = "color: lightgray;"> 6 &nbsp;units<span>';
+
+}
+
+
+
+</script>
+</body>
+</html>
