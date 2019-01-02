@@ -385,5 +385,9 @@
 		]
   },
   "CreditPage" : 
-	 "Author : Yifan Cheng, Areski Himeur, Tsegaye Ture \n Organization : University of Helsinki \n Supervisor : Fabian Fagerholm \n Contact Information : (email) - fabian.fagerholm@helsinki.fi \n Duration November, 2018 - January, 2019 \n Coporated with : OECD \n GitHub Repository : https://github.com/TheSoftwareFactory/LearningCompass2030"
+	 "Author : Yifan Cheng, Areski Himeur, Tsegaye Ture \n Organization : University of Helsinki \n Supervisor : Fabian Fagerholm \n Contact Information : (email) - fabian.fagerholm@helsinki.fi \n Duration November, 2018 - January, 2019 \n Coporated with : OECD \n GitHub Repository : https://github.com/TheSoftwareFactory/LearningCompass2030",
+  "Statistics" : {
+	  "Constructs" : ["LifeSatisfaction", "Health", "Civic Engagement", "Environment", "Education", "Community", "Jobs", "Income", "Housing", "Work Life Balance", "Safety"]
+
+  }
 }

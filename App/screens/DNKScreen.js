@@ -74,6 +74,8 @@ export default class CreditScreen extends React.Component {
     )) }
 
     const programHTML = require('../HTMLS/Bsc_2_majors.html');
+    const fallingLake = require('../HTMLS/html5-canvas-waterfall-lake/index.html');
+    const statistics = require('../HTMLS/statistics/statistics.html');
     
 
 
@@ -318,7 +320,7 @@ export default class CreditScreen extends React.Component {
     
         case 2: return (
           <WebView
-             source={programHTML}
+             source={statistics}
           />
 
         );

@@ -44,21 +44,23 @@ export default class IntroScreen extends React.Component {
       this.setState (previousState => (
       { stage: previousState.stage + 1 }
     )) }
-    
+    const fallingLake = require('../HTMLS/html5-canvas-waterfall-lake/index.html');
 
     switch (this.state.stage)  {
       
+      /*           <WebView
+             source={fallingLake}
+          /> */
       case 0: return (
-
         <View style={styles.container}>
           <ScrollView>
           <Image source={require('../assets/images/OECD2030_Post.jpg')} style={{width: '80%', height: 400, alignSelf : 'center', margin: 10}}/>
-           <TouchableOpacity onPress={() => goNextAndSubmit()} > 
+           <TouchableOpacity onPress={() => goNext()} > 
               <View style={styles.bottomTouch} >
                 <Text  style={styles.subtitle}> Next </Text>
               </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => goToHome()} > 
+          <TouchableOpacity onPress={() => this.setState(previousState => ({ stage: 8 }))} > 
               <View style={styles.bottomTouch} >
                  <Text  style={styles.contents}> {"\n"}Skip Introduction{"\n"} </Text>
                </View>
@@ -380,11 +382,11 @@ in order to facilitate their integration on the job market. </Text>
            <View style={styles.items}>
              <Text style={styles.subtitle}> Introduction Finished </Text>
            </View>
-           <TouchableOpacity onPress={() => goToHome()} > 
+           <TouchableOpacity onPress={() => goNext()} > 
               <View style={styles.bottomTouch} >
-                 <Text  style={styles.head}> {"\n"}Start{"\n"} </Text>
-               </View>
-           </TouchableOpacity>
+                <Text  style={styles.subtitle}> Next </Text>
+              </View>
+          </TouchableOpacity>
            <TouchableOpacity onPress={() => goBack()} > 
               <View style={styles.bottomTouch}  >
                  <Text style={styles.subtitle}> Back </Text>
@@ -392,6 +394,12 @@ in order to facilitate their integration on the job market. </Text>
            </TouchableOpacity>
         </ScrollView>
       </View>
+    );
+
+    case 8: return (
+        <WebView
+             source={fallingLake}
+          />
     );
 
 
