@@ -26,10 +26,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.helsinki.LearningCompass2030"
     },
     "android": {
       "package": "com.oecd.learningcompass"
     }
+    
   }
 }

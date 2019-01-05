@@ -46,6 +46,10 @@ export default class CreditScreen extends React.Component {
       { stage: previousState.stage + 1 }
     )) }
 
+    goBack = () => { this.setState (previousState => (
+      { stage: previousState.stage - 1 }
+    )) }
+
     goNextAndGetResult = () => { 
       tem_state = this.state.pressed;
       q1 = tem_state[0].indexOf(true)+2;
@@ -98,13 +102,13 @@ export default class CreditScreen extends React.Component {
                  <Text  style={styles.contents}> {"\n"} See the report and statistics of each of the 11 fields. {"\n"} </Text>
                </View>
            </TouchableOpacity>
-           <TouchableOpacity onPress={() => jump(0, 0)} > 
+           <TouchableOpacity onPress={() => jump(3, 0)} > 
               <View style={styles.bottomTouch} >
                  <Text  style={styles.head}> {"\n"} Others' experience {"\n"} </Text>
                  <Text  style={styles.contents}> {"\n"} See students' narratives and suggestions of how they develop themselvs on these 11 fields. {"\n"} </Text>
                </View>
            </TouchableOpacity>
-           <TouchableOpacity onPress={() => jump(0, 0)} > 
+           <TouchableOpacity onPress={() => jump(4, 0)} > 
               <View style={styles.bottomTouch} >
                  <Text  style={styles.head}> {"\n"} Formal suggestions {"\n"} </Text>
                  <Text  style={styles.contents}> {"\n"} See suggestions from authorities, scientists and researchers about finding your own areas and topics to learn.  {"\n"} </Text>
@@ -319,13 +323,46 @@ export default class CreditScreen extends React.Component {
 
     
         case 2: return (
-          <WebView
-             source={statistics}
-          />
-
+    <View style={{flex: 1, flexDirection:'column'}}> 
+      <ScrollView style={{flex: 1, flexDirection:'column'}}>
+        <WebView 
+         source={statistics}/>
+         <TouchableOpacity onPress={() => goDNKHome()} > 
+                <View style={styles.bottomTouch} >
+                  <Text  style={styles.subtitle}> Back </Text>
+                </View>
+              </TouchableOpacity>
+           </ScrollView>
+      </View>
         );
 
-
+        case 3: return (
+          <View style={{flex: 1, flexDirection:'column'}}> 
+            <ScrollView style={{flex: 1, flexDirection:'column'}}>
+              <WebView 
+               source={{uri: 'http://news.baidu.com/'}} />
+               <TouchableOpacity onPress={() => goDNKHome()} > 
+                      <View style={styles.bottomTouch} >
+                        <Text  style={styles.subtitle}> Back </Text>
+                      </View>
+                    </TouchableOpacity>
+               </ScrollView>
+            </View>
+              );
+        
+        case 4: return (
+          <View style={{flex: 1, flexDirection:'column'}}> 
+            <ScrollView style={{flex: 1, flexDirection:'column'}}>
+              <WebView 
+               source={programHTML} />
+               <TouchableOpacity onPress={() => goDNKHome()} > 
+                      <View style={styles.bottomTouch} >
+                        <Text  style={styles.subtitle}> Back </Text>
+                      </View>
+                    </TouchableOpacity>
+               </ScrollView>
+            </View>
+              );
     }
   }
 }

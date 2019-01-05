@@ -65,6 +65,11 @@ export default class IntroScreen extends React.Component {
                  <Text  style={styles.contents}> {"\n"}Skip Introduction{"\n"} </Text>
                </View>
            </TouchableOpacity>
+           <TouchableOpacity onPress={() => goToHome()} > 
+              <View style={styles.bottomTouch} >
+                 <Text  style={styles.contents}> {"\n"}Go Home{"\n"} </Text>
+               </View>
+           </TouchableOpacity>
           </ScrollView>
         </View>
         
@@ -397,9 +402,18 @@ in order to facilitate their integration on the job market. </Text>
     );
 
     case 8: return (
-        <WebView
-             source={fallingLake}
-          />
+      <View style={{flex: 1, flexDirection:'column'}}> 
+      <ScrollView style={{flex: 1, flexDirection:'column'}}>
+        <WebView 
+         source={fallingLake}/>
+         <TouchableOpacity onPress={() => goBack()} > 
+                <View style={styles.bottomTouch} >
+                  <Text  style={styles.subtitle}> Back </Text>
+                </View>
+              </TouchableOpacity>
+           </ScrollView>
+      </View>
+        
     );
 
 
