@@ -11,7 +11,6 @@ export default class HomeScreen extends React.Component {
     this.state = {
       isLoading: true,
       interests: 'Recommended Start Point',
-      boollist: 'hi',
       credit: false,
     };
   }
@@ -59,6 +58,8 @@ export default class HomeScreen extends React.Component {
     const {navigate} = this.props.navigation;
     var db = require('../assets/data.json');
     var creditPage = db["CreditPage"];
+    const { navigation } = this.props;
+    const interest = navigation.getParam('intere', 'ERROR');
     _onPetalPress = (petalId,petalName,color) => {global.construct = petalId; global.color = color; navigate('Links',{ construct: petalName });}
     _toScreen = (screen) => { navigate(screen,{  });}
     _showCredit = () => { this.setState (previousState => ({ credit: !previousState.credit } )) }
@@ -69,21 +70,9 @@ export default class HomeScreen extends React.Component {
           { interests: 'Recommended Start Point'  }
         ))
       } else {
-      AsyncStorage.getItem('Interests').then((value) => {
         this.setState (previousState => (
-          { boollist: value  }
-        )) 
-        var rcm = 'hi';
-        switch (this.state.boollist) {
-        case 'true,false,false,false,false,false,false,false,false,false,false' : rcm = 'Education'; break;
-        case 'true,true,false,false,false,false,false,false,false,false,false' : rcm ='Community'; break;
-        default : rcm ='Health'; break;
-      }
-        this.setState (previousState => (
-        { interests: rcm  }
-      )) 
-      }) 
-      
+        { interests: interest  }
+      ))
       }
     }
  
@@ -113,16 +102,25 @@ export default class HomeScreen extends React.Component {
             <Text style={styles.subtitle}>This application aims to build an understanding of the knowledge, skills, and values necessary to shape the future. Choose a construct to develop by touching one of the petals of the flower.
             </Text>
             </View>
-            <TouchableOpacity onPress={() => _toScreen('Credit')} >
-            <View style={styles.bottomTouch} >
-            <Text  style={styles.subtitle2}> Credit Page </Text>
-            </View>
-            </TouchableOpacity>
             <TouchableOpacity onPress={() => _toScreen('DoNotKnow')} >
-            <View style={styles.bottomTouch} >
-            <Text  style={styles.subtitle2}> Do not know where to start ? </Text>
-            </View>
-            </TouchableOpacity>
+      <View style={styles.bottomTouch} >
+      <Text  style={styles.subtitle2}> More About the Background </Text>
+      </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => _showCredit()}>
+      <View style={styles.bottomTouch}>
+      <Text  style={styles.subtitle2}> Credit Information </Text>
+      </View>
+      </TouchableOpacity>
+     
+      { this.state.credit ? <Text  style={ {fontFamily: "noto-sans-thin", margin : 5}}> {creditPage} </Text> : null }    
+      
+      <TouchableOpacity onPress={() => updateInterest() } >
+      <View style={styles.bottomTouch}   >
+      <Text  style={styles.subtitle2}> {this.state.interests}  </Text>
+      </View>
+      </TouchableOpacity>
             </ScrollView>
             </View>
           )

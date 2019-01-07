@@ -4,15 +4,16 @@ StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, WebView, To
 import { getTimeFieldValues } from 'uuid-js';
 
 export default class IntroScreen extends React.Component {
+
   
   constructor(props) {
     super(props);
     this.state = { 
       stage: 0, 
-      pressed: [false, false,false,false,false,false,false,false,false,false,false],
+      pressed: [0,0,0,0,0,0,0,0,0,0,0,0],
       fields: ['Sports', 'News', 'Entertainment', 'Lifestyle', 'Music', 'Science', 
       'Technology', 'Education', 'Art', 'Culture', 'Politics', 'Game'],
-      intere : 'interests',  };
+      intere : 'You must firstly submit your interest in the introduction part in order to get recommendation.', };
   }
   
   static navigationOptions = {
@@ -25,26 +26,31 @@ export default class IntroScreen extends React.Component {
     const {dismiss} = this.props.navigation;
     const color1 = '#184726';
     const color2 = '#5f8c6c';
-    goNext = () => { this.setState (previousState => (
-      { stage: previousState.stage + 1 }
-    )) }
-    goBack = () => { this.setState (previousState => (
-      { stage: previousState.stage - 1 }
-    )) }
+    const consts = ["Life Satisfaction", "Health", "Civic Engagement", "Environment", "Education", "Community", "Jobs", 
+    "Income", "Housing", "Work-Life Balance", "Safety"];
+    goNext = () => { this.setState (previousState => ({ stage: previousState.stage + 1 })) ;  }
+    goBack = () => { this.setState (previousState => ({ stage: previousState.stage - 1 }));}
+    goLast = () => { this.setState (previousState => ({ stage: 7 })); }
+    goFirst = () => { this.setState (previousState => ({ stage: 0 })) }
     changeColor = (num) => { 
       tem_state = this.state.pressed;
-      tem_state[num] = !this.state.pressed[num];
+      tem_state[num] = (this.state.pressed[num]-1)**2; 
       this.setState (previousState => (
       { pressed: tem_state }
     )) }
-    goToHome = () => { 
-      AsyncStorage.setItem('Interests', String(this.state.pressed)); dismiss('IntroScreen'); navigate('Home'); }
-    goNextAndSubmit = () => { 
-      AsyncStorage.setItem('Interests', String(this.state.pressed));
-      this.setState (previousState => (
-      { stage: previousState.stage + 1 }
-    )) }
-    const fallingLake = require('../HTMLS/html5-canvas-waterfall-lake/index.html');
+    goToHome = () => { navigate('Home', {'intere' : this.state.intere} ); }
+    updateIntere = () => { 
+      var rcm = Math.abs(this.state.pressed[0]+2*this.state.pressed[1]+4*this.state.pressed[2]+8*this.state.pressed[3]+
+      16*this.state.pressed[4]+32*this.state.pressed[5]+64*this.state.pressed[6]+128*this.state.pressed[7]+
+      +256*this.state.pressed[8]+512*this.state.pressed[9]+1024*this.state.pressed[10]+2048*this.state.pressed[11]) % 11;
+      this.setState (() => ({ intere : consts[rcm]})) }
+     showAlertWithDelay=()=>{
+      setTimeout(function(){
+        //Put All Your Code Here, Which You Want To Execute After Some Delay Time.
+        Alert.alert("Alert Shows After 1 Seconds of Delay.")
+      }, 1000);
+   
+    }
 
     switch (this.state.stage)  {
       
@@ -54,22 +60,29 @@ export default class IntroScreen extends React.Component {
       case 0: return (
         <View style={styles.container}>
           <ScrollView>
-          <Image source={require('../assets/images/OECD2030_Post.jpg')} style={{width: '80%', height: 400, alignSelf : 'center', margin: 10}}/>
-           <TouchableOpacity onPress={() => goNext()} > 
-              <View style={styles.bottomTouch} >
-                <Text  style={styles.subtitle}> Next </Text>
-              </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.setState(previousState => ({ stage: 8 }))} > 
-              <View style={styles.bottomTouch} >
-                 <Text  style={styles.contents}> {"\n"}Skip Introduction{"\n"} </Text>
-               </View>
-           </TouchableOpacity>
-           <TouchableOpacity onPress={() => goToHome()} > 
-              <View style={styles.bottomTouch} >
-                 <Text  style={styles.contents}> {"\n"}Go Home{"\n"} </Text>
-               </View>
-           </TouchableOpacity>
+          <Image source={require('../assets/images/OECD2030_Post.jpg')} style={{width: '95%', height: 540, alignSelf : 'center', margin: 2}}/>
+          <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
+                 <TouchableOpacity onPress={() => {} } > 
+                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>First Page</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goLast()} > 
+                   <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Skip</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goNext() } > 
+                   <View style={  {  backgroundColor : "#058764",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Next</Text>
+                   </View>
+                 </TouchableOpacity> 
+                 <TouchableOpacity onPress={() => goLast()  } > 
+                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Last Page</Text>
+                   </View>
+                 </TouchableOpacity>
+            </View>
           </ScrollView>
         </View>
         
@@ -89,16 +102,28 @@ export default class IntroScreen extends React.Component {
             This Learning Framework 2030 offers a vision and some underpinning principles for the future of 
             education systems. It is about orientation, not prescription. </Text>
           </View>
-          <TouchableOpacity onPress={() => goNext()} > 
-              <View style={styles.bottomTouch} >
-                <Text  style={styles.subtitle}> Next </Text>
-              </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => goBack()} > 
-              <View style={styles.bottomTouch} >
-                 <Text  style={styles.subtitle}> Back </Text>
-               </View>
-           </TouchableOpacity>
+          <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
+                 <TouchableOpacity onPress={() => goFirst() } > 
+                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>First Page</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goBack() } > 
+                   <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Back</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goNext() } > 
+                   <View style={  {  backgroundColor : "#058764",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Next</Text>
+                   </View>
+                 </TouchableOpacity> 
+                 <TouchableOpacity onPress={() => goLast()  } > 
+                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Last Page</Text>
+                   </View>
+                 </TouchableOpacity>
+            </View>
         </ScrollView>
       </View>
       
@@ -121,16 +146,28 @@ export default class IntroScreen extends React.Component {
              being Framework, which includes: jobs, income, housing, work-life balance, safety, life
              satisfaction, health, civic engagement, environment, education and community. </Text>
           </View>
-          <TouchableOpacity onPress={() => goNext()} > 
-              <View style={styles.bottomTouch} >
-                <Text  style={styles.subtitle}> Next </Text>
-              </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => goBack()} > 
-              <View style={styles.bottomTouch} >
-                 <Text  style={styles.subtitle}> Back </Text>
-               </View>
-           </TouchableOpacity>
+          <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
+                 <TouchableOpacity onPress={() => goFirst() } > 
+                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>First Page</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goBack() } > 
+                   <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Back</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goNext() } > 
+                   <View style={  {  backgroundColor : "#058764",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Next</Text>
+                   </View>
+                 </TouchableOpacity> 
+                 <TouchableOpacity onPress={() => goLast()  } > 
+                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Last Page</Text>
+                   </View>
+                 </TouchableOpacity>
+            </View>
         </ScrollView>
       </View>
       
@@ -188,16 +225,28 @@ export default class IntroScreen extends React.Component {
           <Text style={styles.head}> Community </Text>
             <Text style={styles.contents}> Gets more diverse. </Text>
           </View>
-          <TouchableOpacity onPress={() => goNext()} > 
-              <View style={styles.bottomTouch} >
-                <Text  style={styles.subtitle}> Next </Text>
-              </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => goBack()} > 
-              <View style={styles.bottomTouch} >
-                 <Text  style={styles.subtitle}> Back </Text>
-               </View>
-           </TouchableOpacity>
+          <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
+                 <TouchableOpacity onPress={() => goFirst() } > 
+                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>First Page</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goBack() } > 
+                   <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Back</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goNext() } > 
+                   <View style={  {  backgroundColor : "#058764",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Next</Text>
+                   </View>
+                 </TouchableOpacity> 
+                 <TouchableOpacity onPress={() => goLast()  } > 
+                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Last Page</Text>
+                   </View>
+                 </TouchableOpacity>
+            </View>
         </ScrollView>
       </View>
       
@@ -248,16 +297,28 @@ knowledge. In secondary education, they want education to be career focused
 and in post-secondary education, they want education to be job market oriented
 in order to facilitate their integration on the job market. </Text>
           </View>
-          <TouchableOpacity onPress={() => goNext()} > 
-              <View style={styles.bottomTouch} >
-                <Text  style={styles.subtitle}> Next </Text>
-              </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => goBack()} > 
-              <View style={styles.bottomTouch} >
-                 <Text  style={styles.subtitle}> Back </Text>
-               </View>
-           </TouchableOpacity>
+          <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
+                 <TouchableOpacity onPress={() => goFirst() } > 
+                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>First Page</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goBack() } > 
+                   <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Back</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goNext() } > 
+                   <View style={  {  backgroundColor : "#058764",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Next</Text>
+                   </View>
+                 </TouchableOpacity> 
+                 <TouchableOpacity onPress={() => goLast()  } > 
+                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Last Page</Text>
+                   </View>
+                 </TouchableOpacity>
+            </View>
         </ScrollView>
       </View>
       
@@ -272,16 +333,28 @@ in order to facilitate their integration on the job market. </Text>
           <WebView
            source={{uri: 'https://www.youtube.com/embed/tkm_WzQRPEk'}} 
            style={{width: "100%", height: 300}}/>
-           <TouchableOpacity onPress={() => goNext()} > 
-              <View style={styles.bottomTouch} >
-                <Text  style={styles.subtitle}> Next </Text>
-              </View>
-          </TouchableOpacity>
-             <TouchableOpacity onPress={() => goBack()} > 
-              <View style={styles.bottomTouch} >
-                 <Text  style={styles.subtitle}> Back </Text>
-               </View>
-           </TouchableOpacity>
+           <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
+                 <TouchableOpacity onPress={() => goFirst() } > 
+                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>First Page</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goBack() } > 
+                   <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Back</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goNext() } > 
+                   <View style={  {  backgroundColor : "#058764",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Next</Text>
+                   </View>
+                 </TouchableOpacity> 
+                 <TouchableOpacity onPress={() => goLast()  } > 
+                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Last Page</Text>
+                   </View>
+                 </TouchableOpacity>
+            </View>
         </ScrollView>
       </View>
     );
@@ -296,17 +369,17 @@ in order to facilitate their integration on the job market. </Text>
 
         <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}>
            <TouchableOpacity onPress={() => changeColor(0)  } > 
-              <View style={   {  backgroundColor : this.state.pressed[0] ? color2 : color1, margin : 5}  }>
+              <View style={   {  backgroundColor : this.state.pressed[0] > 0  ? color2 : color1, margin : 5}  }>
                 <Text  style={styles.subtitle}> Sports </Text>
               </View>
           </TouchableOpacity> 
           <TouchableOpacity onPress={() => changeColor(1)}  > 
-              <View style={  {  backgroundColor : this.state.pressed[1] ? color2 : color1,  margin : 5}  }>
+              <View style={  {  backgroundColor : this.state.pressed[1]> 0  ? color2 : color1,  margin : 5}  }>
                 <Text  style={styles.subtitle}> News </Text>
               </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => changeColor(2)} > 
-              <View style={  { backgroundColor : this.state.pressed[2] ? color2 : color1,  margin : 5}   }>
+              <View style={  { backgroundColor : this.state.pressed[2]> 0  ? color2 : color1,  margin : 5}   }>
                 <Text  style={styles.subtitle}> Entertainment </Text>
               </View>
           </TouchableOpacity>
@@ -314,17 +387,17 @@ in order to facilitate their integration on the job market. </Text>
           
           <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
           <TouchableOpacity onPress={() => changeColor(3)} > 
-              <View style={  {  backgroundColor : this.state.pressed[3] ? color2 : color1,  margin : 5}  }>
+              <View style={  {  backgroundColor : this.state.pressed[3]> 0  ? color2 : color1,  margin : 5}  }>
                 <Text  style={styles.subtitle}> Lifestyle </Text>
               </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => changeColor(4)} > 
-              <View style={  {  backgroundColor : this.state.pressed[4] ? color2 : color1,  margin : 5}  }>
+              <View style={  {  backgroundColor : this.state.pressed[4]> 0  ? color2 : color1,  margin : 5}  }>
                 <Text  style={styles.subtitle}> Music </Text>
               </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => changeColor(5)} > 
-              <View style={  {   backgroundColor : this.state.pressed[5] ? color2 : color1,  margin : 5}  }>
+              <View style={  {   backgroundColor : this.state.pressed[5]> 0  ? color2 : color1,  margin : 5}  }>
                 <Text  style={styles.subtitle}> Science </Text>
               </View>
           </TouchableOpacity>
@@ -332,17 +405,17 @@ in order to facilitate their integration on the job market. </Text>
 
           <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}>
           <TouchableOpacity onPress={() => changeColor(6)} > 
-              <View style={  {   backgroundColor : this.state.pressed[6] ? color2 : color1,  margin : 5}  }>
+              <View style={  {   backgroundColor : this.state.pressed[6] > 0 ? color2 : color1,  margin : 5}  }>
                 <Text  style={styles.subtitle}> Technology </Text>
               </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => changeColor(7)} > 
-              <View style={  { backgroundColor : this.state.pressed[7] ? color2 : color1,  margin : 5}  }>
+              <View style={  { backgroundColor : this.state.pressed[7]> 0  ? color2 : color1,  margin : 5}  }>
                 <Text  style={styles.subtitle}> Education </Text>
               </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => changeColor(8)} > 
-              <View style={  {  backgroundColor : this.state.pressed[8] ? color2 : color1, margin : 5}  }>
+              <View style={  {  backgroundColor : this.state.pressed[8]> 0 ? color2 : color1, margin : 5}  }>
                 <Text  style={styles.subtitle}> Art </Text>
               </View>
           </TouchableOpacity>
@@ -350,70 +423,76 @@ in order to facilitate their integration on the job market. </Text>
 
           <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}>
           <TouchableOpacity onPress={() => changeColor(9)} > 
-              <View style={  {  backgroundColor : this.state.pressed[9] ? color2 : color1,  margin : 5}  }>
+              <View style={  {  backgroundColor : this.state.pressed[9]> 0  ? color2 : color1,  margin : 5}  }>
                 <Text  style={styles.subtitle}> Culture </Text>
               </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => changeColor(10)} > 
-              <View style={  {  backgroundColor : this.state.pressed[10] ? color2 : color1, margin : 5}  }>
+              <View style={  {  backgroundColor : this.state.pressed[10]> 0 ? color2 : color1, margin : 5}  }>
                 <Text  style={styles.subtitle}> Politics </Text>
               </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => changeColor(11)} > 
-              <View style={  {  backgroundColor : this.state.pressed[11] ? color2 : color1,  margin : 5}  }>
+              <View style={  {  backgroundColor : this.state.pressed[11]> 0  ? color2 : color1,  margin : 5}  }>
                 <Text  style={styles.subtitle}> Game </Text>
               </View>
-          </TouchableOpacity>
+          </TouchableOpacity> 
           </View>
 
-          <TouchableOpacity onPress={() => goNextAndSubmit()} > 
-              <View style={styles.bottomTouch} >
-                <Text  style={styles.subtitle}> Submit and Next </Text>
-              </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => goBack()} > 
-              <View style={styles.bottomTouch} >
-                 <Text  style={styles.subtitle}> Back </Text>
-               </View>
-           </TouchableOpacity>
+          <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
+                 <TouchableOpacity onPress={() => goFirst() } > 
+                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>First Page</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goBack() } > 
+                   <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Back</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => {updateIntere(); goNext();} } > 
+                   <View style={  {  backgroundColor : "#058764",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Submit</Text>
+                   </View>
+                 </TouchableOpacity> 
+                 <TouchableOpacity onPress={() => goLast()  } > 
+                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Last Page</Text>
+                   </View>
+                 </TouchableOpacity>
+            </View>
           
         </ScrollView>
       </View>
     );
 
+
     case 7: return (
       <View style={styles.container}>
-        <ScrollView>
-           <View style={styles.items}>
-             <Text style={styles.subtitle}> Introduction Finished </Text>
-           </View>
-           <TouchableOpacity onPress={() => goNext()} > 
-              <View style={styles.bottomTouch} >
-                <Text  style={styles.subtitle}> Next </Text>
-              </View>
-          </TouchableOpacity>
-           <TouchableOpacity onPress={() => goBack()} > 
-              <View style={styles.bottomTouch}  >
-                 <Text style={styles.subtitle}> Back </Text>
-               </View>
-           </TouchableOpacity>
+       <ScrollView>
+         <Text  style={{fontFamily: "serif", color:'black', fontSize: 20, textAlign: 'center'}}> Checking Update and New Messages </Text>
+          <WebView
+           source={{uri: 'https://storage.googleapis.com/symmetric-lotus-227804.appspot.com/html5-canvas-waterfall-lake/index.html'}} 
+           style={{width: "100%", marginTop: 5}}/>
+           <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
+                 <TouchableOpacity onPress={() => goFirst() } > 
+                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>First Page</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => goBack() } > 
+                   <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Back</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => {updateIntere(); goToHome() }  }> 
+                   <View style={  {  backgroundColor : "#058764",  margin : 5}  }>
+                    <Text  style={styles.subtitle}>Go Home</Text>
+                   </View>
+                 </TouchableOpacity>
+            </View>
         </ScrollView>
       </View>
-    );
-
-    case 8: return (
-      <View style={{flex: 1, flexDirection:'column'}}> 
-      <ScrollView style={{flex: 1, flexDirection:'column'}}>
-        <WebView 
-         source={fallingLake}/>
-         <TouchableOpacity onPress={() => goBack()} > 
-                <View style={styles.bottomTouch} >
-                  <Text  style={styles.subtitle}> Back </Text>
-                </View>
-              </TouchableOpacity>
-           </ScrollView>
-      </View>
-        
     );
 
 
