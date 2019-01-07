@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Text, Platform, ScrollView, StyleSheet, TouchableOpacity, View, 
+import {Image, Text, Platform, ScrollView, StyleSheet, TouchableOpacity, View, Linking,
 StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, WebView, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 
 export default class CreditScreen extends React.Component {
@@ -10,7 +10,10 @@ export default class CreditScreen extends React.Component {
       stage: 0,
       pressed: [ [false, false], [false, false, false, false, false], [false, false, false, false, false], [false, false, false, false],
                  [false, false, false, false, false, false, false]], 
-      psyResult: 'Unknown'};
+      psyResult: 'Unknown',
+      experiences : [false, false, false, false],
+      loadMore : false
+    };
   }
   
   
@@ -50,6 +53,15 @@ export default class CreditScreen extends React.Component {
       { stage: previousState.stage - 1 }
     )) }
 
+    showExperiences = (num) => { 
+      tem_experiences = this.state.experiences;
+      tem_experiences[num] = !this.state.experiences[num];
+      this.setState (previousState => ( { experiences: tem_experiences})); }
+    
+    loadMore = () => { this.setState (previousState => (
+      { loadMore: !previousState.stage.loadMore }
+    )) }
+
     goNextAndGetResult = () => { 
       tem_state = this.state.pressed;
       q1 = tem_state[0].indexOf(true)+2;
@@ -76,10 +88,10 @@ export default class CreditScreen extends React.Component {
       this.setState (previousState => (
       { stage: previousState.stage + 1, psyResult: rt }
     )) }
-
-    const programHTML = require('../HTMLS/Bsc_2_majors.html');
+    /*
     const fallingLake = require('../HTMLS/html5-canvas-waterfall-lake/index.html');
-    const statistics = require('../HTMLS/statistics/statistics.html');
+    const statistics = require('../HTMLS/statistics/statistics.html'); */
+
     
 
 
@@ -92,26 +104,26 @@ export default class CreditScreen extends React.Component {
           <ScrollView>
           <TouchableOpacity onPress={() => jump(1, 0)} > 
               <View style={styles.bottomTouch} >
-                 <Text  style={styles.head}> {"\n"} PSY Test {"\n"} </Text>
-                 <Text  style={styles.contents}> {"\n"} You can make a psychological test to help find your interests. {"\n"} </Text>
+                 <Text  style={styles.head}> PSY Test </Text>
+                 <Text  style={styles.contents}> You can make a psychological test to help find your interests. </Text>
                </View>
            </TouchableOpacity>
            <TouchableOpacity onPress={() => jump(2, 0)} > 
               <View style={styles.bottomTouch} >
-                 <Text  style={styles.head}> {"\n"} Statistics {"\n"} </Text>
-                 <Text  style={styles.contents}> {"\n"} See the report and statistics of each of the 11 fields. {"\n"} </Text>
+                 <Text  style={styles.head}> Statistics </Text>
+                 <Text  style={styles.contents}> See the report and statistics of each of the 11 fields. </Text>
                </View>
            </TouchableOpacity>
            <TouchableOpacity onPress={() => jump(3, 0)} > 
               <View style={styles.bottomTouch} >
-                 <Text  style={styles.head}> {"\n"} Others' experience {"\n"} </Text>
-                 <Text  style={styles.contents}> {"\n"} See students' narratives and suggestions of how they develop themselvs on these 11 fields. {"\n"} </Text>
+                 <Text  style={styles.head}> Others' Experience </Text>
+                 <Text  style={styles.contents}> See students' narratives and suggestions of how they develop themselvs on these 11 fields. </Text>
                </View>
            </TouchableOpacity>
-           <TouchableOpacity onPress={() => jump(4, 0)} > 
+           <TouchableOpacity onPress={() => Linking.openURL('https://storage.googleapis.com/symmetric-lotus-227804.appspot.com/Reports/Reports.html') } > 
               <View style={styles.bottomTouch} >
-                 <Text  style={styles.head}> {"\n"} Formal suggestions {"\n"} </Text>
-                 <Text  style={styles.contents}> {"\n"} See suggestions from authorities, scientists and researchers about finding your own areas and topics to learn.  {"\n"} </Text>
+                 <Text  style={styles.head}> Report and Materials </Text>
+                 <Text  style={styles.contents}>  See reports and materials about these 11 fields. </Text>
                </View>
            </TouchableOpacity>
           </ScrollView>
@@ -315,54 +327,139 @@ export default class CreditScreen extends React.Component {
                
              </ScrollView>
            </View>
-
-
            );
                
         }
 
     
         case 2: return (
-    <View style={{flex: 1, flexDirection:'column'}}> 
-      <ScrollView style={{flex: 1, flexDirection:'column'}}>
+        <View style={{flex: 1, flexDirection:'column'}}>
         <WebView 
-         source={statistics}/>
+         source={{uri: "https://storage.googleapis.com/symmetric-lotus-227804.appspot.com/statistics/statistics_mobile.html"}} />
          <TouchableOpacity onPress={() => goDNKHome()} > 
                 <View style={styles.bottomTouch} >
                   <Text  style={styles.subtitle}> Back </Text>
                 </View>
-              </TouchableOpacity>
-           </ScrollView>
+         </TouchableOpacity>
       </View>
-        );
+      );
 
         case 3: return (
-          <View style={{flex: 1, flexDirection:'column'}}> 
-            <ScrollView style={{flex: 1, flexDirection:'column'}}>
-              <WebView 
-               source={{uri: 'http://news.baidu.com/'}} />
-               <TouchableOpacity onPress={() => goDNKHome()} > 
-                      <View style={styles.bottomTouch} >
-                        <Text  style={styles.subtitle}> Back </Text>
+          <View style={styles.container}>
+             <ScrollView >
+              <TouchableOpacity onPress={() => showExperiences(0)} > 
+                      <View style={styles.items2} >
+                         <Text  style={styles.head}>Graham Schwikkard</Text>
+                         <Text  style={styles.subtitle}>Consulting Manager, Datta Burton and Associates</Text>
+                         <Text  style={styles.contents}>"I enjoyed the return to a learning environment, 
+                          with the benefit of being able to augment the taught material with personal professional 
+                          experiences and that of others in the class."{"\n"} </Text>
+                          <Text  style={styles.head}> Click me to read more {"\n"} </Text>
                       </View>
-                    </TouchableOpacity>
-               </ScrollView>
-            </View>
-              );
-        
-        case 4: return (
-          <View style={{flex: 1, flexDirection:'column'}}> 
-            <ScrollView style={{flex: 1, flexDirection:'column'}}>
-              <WebView 
-               source={programHTML} />
-               <TouchableOpacity onPress={() => goDNKHome()} > 
-                      <View style={styles.bottomTouch} >
-                        <Text  style={styles.subtitle}> Back </Text>
+              </TouchableOpacity>
+              { this.state.experiences[0] ? 
+              <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                 <TouchableOpacity onPress={() => navigate('Setting', { url : 'https://www.youtube.com/channel/UCm-zBFOtOkGM9Wlauh-EOIA'})  } > 
+                   <View style={  {  backgroundColor : "#776e0d",  margin : 5}  }>
+                    <Text  style={styles.subtitle}> Video Narrative </Text>
+                   </View>
+                 </TouchableOpacity> 
+                 <TouchableOpacity onPress={() => navigate('Setting', { url : 'https://www.jbs.cam.ac.uk/alumni/alumni-profiles/mba/consulting/graham-schwikkard/'})  } > 
+                   <View style={  {  backgroundColor : "#37770c",  margin : 5}  }>
+                    <Text  style={styles.subtitle}> Profile </Text>
+                   </View>
+                 </TouchableOpacity>
+               </View> : null } 
+ 
+
+              <TouchableOpacity onPress={() => showExperiences(1)} > 
+                      <View style={styles.items2} >
+                         <Text  style={styles.head}>Helen Quirke</Text>
+                         <Text  style={styles.subtitle}>Principal, BCG Toronto</Text>
+                         <Text  style={styles.contents}>"I felt that I needed broader business experience and more international 
+                         exposure to be able to bring a genuine commercial perspective to the world of sport."{"\n"} </Text>
+                          <Text  style={styles.head}> Click me to read more {"\n"} </Text>
                       </View>
-                    </TouchableOpacity>
-               </ScrollView>
-            </View>
-              );
+              </TouchableOpacity>
+              { this.state.experiences[1] ? 
+              <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                 <TouchableOpacity onPress={() => navigate('Setting', { url : 'https://www.youtube.com/watch?v=eSHj1GH17SY'})  } > 
+                   <View style={  {  backgroundColor : "#776e0d",  margin : 5}  }>
+                    <Text  style={styles.subtitle}> Video Narrative </Text>
+                   </View>
+                 </TouchableOpacity> 
+                 <TouchableOpacity onPress={() => navigate('Setting', { url : 'https://www.jbs.cam.ac.uk/alumni/alumni-profiles/mba/consulting/helen-quirke/'})  } > 
+                   <View style={  {  backgroundColor : "#37770c",  margin : 5}  }>
+                    <Text  style={styles.subtitle}> Profile </Text>
+                   </View>
+                 </TouchableOpacity>
+               </View> : null } 
+
+              { !this.state.loadMore ? 
+              <TouchableOpacity onPress={() => loadMore()} > 
+                <View style={styles.bottomTouch}  >
+                  <Text  style={styles.contents}> More People and experiences </Text>
+                </View>
+              </TouchableOpacity> : null }
+
+              { this.state.loadMore ? 
+              <TouchableOpacity onPress={() => showExperiences(2)} > 
+                      <View style={styles.items2} >
+                         <Text  style={styles.head}>Damon Sununtnasuk</Text>
+                         <Text  style={styles.subtitle}>Head of Digital Marketing and Campaigns, Samsung Electronics</Text>
+                         <Text  style={styles.contents}>"I knew coming into the MBA that a career change to Asia was going to be 
+                         the right choice for me, and I really felt that the Cambridge MBA helped enable and empower me to make 
+                         that transition."{"\n"} </Text>
+                          <Text  style={styles.head}> Click me to read more {"\n"} </Text>
+                      </View>
+              </TouchableOpacity> : null }
+
+              { this.state.experiences[2] ? 
+              <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                 <TouchableOpacity onPress={() => navigate('Setting', { url : 'https://www.youtube.com/watch?v=ihFWjh5efwE'})  } > 
+                   <View style={  {  backgroundColor : "#776e0d",  margin : 5}  }>
+                    <Text  style={styles.subtitle}> Video Narrative </Text>
+                   </View>
+                 </TouchableOpacity> 
+                 <TouchableOpacity onPress={() => navigate('Setting', { url : 'https://www.jbs.cam.ac.uk/alumni/alumni-profiles/mba/onlinetechnology/damon-sununtnasuk/'})  } > 
+                   <View style={  {  backgroundColor : "#37770c",  margin : 5}  }>
+                    <Text  style={styles.subtitle}> Profile </Text>
+                   </View>
+                 </TouchableOpacity>
+               </View> : null } 
+
+              { this.state.loadMore ? 
+              <TouchableOpacity onPress={() => showExperiences(3)} > 
+                      <View style={styles.items2} >
+                         <Text  style={styles.head}>Olga Royenko</Text>
+                         <Text  style={styles.subtitle}>Marketing Lead, Aspen Technology</Text>
+                         <Text  style={styles.contents}>"This was a transformational experience. It has impacted the 
+                         way I interact with my team, colleagues, managers and peers. I am much more confident and vocal in my 
+                         leadership and that has helped me to build relationships across my organisation."{"\n"} </Text>
+                          <Text  style={styles.head}> Click me to read more {"\n"} </Text>
+                      </View>
+              </TouchableOpacity> : null }
+              { this.state.experiences[3] ? 
+              <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                 <TouchableOpacity onPress={() => navigate('Setting', { url : 'https://www.youtube.com/watch?v=PRIs1g9gR4o'})  } > 
+                   <View style={  {  backgroundColor : "#776e0d",  margin : 5}  }>
+                    <Text  style={styles.subtitle}> Video Narrative </Text>
+                   </View>
+                 </TouchableOpacity> 
+                 <TouchableOpacity onPress={() => navigate('Setting', { url : 'https://www.jbs.cam.ac.uk/alumni/alumni-profiles/mba/onlinetechnology/olga-royenko/'})  } > 
+                   <View style={  {  backgroundColor : "#37770c",  margin : 5}  }>
+                    <Text  style={styles.subtitle}> Profile </Text>
+                   </View>
+                 </TouchableOpacity>
+               </View> : null } 
+              <TouchableOpacity onPress={() => goDNKHome()} > 
+               <View style={styles.bottomTouch} >
+                  <Text  style={styles.subtitle}> Back </Text>
+                </View>
+              </TouchableOpacity>  
+              </ScrollView>
+            </View>  
+        );
     }
   }
 }
@@ -378,6 +475,13 @@ const styles = StyleSheet.create({
     justifyContent:'center',
   },
   items: {
+    backgroundColor : '#3b3a70',
+    marginRight: "5%",
+    marginLeft: "5%",
+    alignItems: 'center',
+    margin: 10,
+  },
+  items2: {
     backgroundColor : '#3b3a70',
     marginRight: "5%",
     marginLeft: "5%",
@@ -407,7 +511,7 @@ const styles = StyleSheet.create({
     margin : 10,
   },
   contents: {
-    fontFamily: "serif",
+    fontFamily: "noto-sans-thin",
     color: '#b3d5d6',
     fontSize: 20,
     textAlign: 'center',
