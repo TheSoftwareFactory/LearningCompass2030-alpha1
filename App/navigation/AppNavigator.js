@@ -8,6 +8,7 @@ import LinksScreen from './LinksNavigator';
 import LearnScreen from '../screens/LearnScreen';
 import IntroScreen from '../screens/IntroScreen';
 import DNKScreen from '../screens/DNKScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 export default createStackNavigator(
   {
@@ -54,6 +55,15 @@ export default createStackNavigator(
         header: null
       }
     },
+    Setting: {
+      // Screen imported
+      screen: SettingsScreen,
+      // navigationOptions for the screen
+      navigationOptions: {
+        header: null
+      }
+    },
+
   },
 )
 ;
