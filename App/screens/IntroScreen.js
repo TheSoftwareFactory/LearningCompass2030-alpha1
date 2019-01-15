@@ -60,8 +60,18 @@ export default class IntroScreen extends React.Component {
       case 0: return (
         <View style={styles.container}>
           <ScrollView>
-          <Image source={require('../assets/images/OECD2030_Post.jpg')} style={{width: '95%', height: 540, alignSelf : 'center', margin: 2}}/>
+          <Image source={require('../assets/images/OECD2030_Post.jpg')} style={{width: '60%', height: 300, alignSelf : 'center', margin: 2}}/>
           <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
+                 <TouchableOpacity onPress={() => {} } > 
+                   <View style={  {  backgroundColor : "#848705",  margin : 5, width: '90%'}  }>
+                    <Text  style={styles.subtitle}>Login</Text>
+                   </View>
+                 </TouchableOpacity>
+                 <TouchableOpacity onPress={() => {} } > 
+                   <View style={  {  backgroundColor : "#848705",  margin : 5, width: '90%'}  }>
+                    <Text  style={styles.subtitle}>Register</Text>
+                   </View>
+                 </TouchableOpacity>
                  <TouchableOpacity onPress={() => {} } > 
                    <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
                     <Text  style={styles.subtitle}>First Page</Text>
