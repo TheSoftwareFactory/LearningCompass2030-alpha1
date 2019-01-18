@@ -13,7 +13,7 @@ export default class LinksScreen extends React.Component {
     const name = navigation.getParam('construct', 'ERROR');
     var db = require('../assets/data.json');
 
-    var contents = db[global.construct]['items'].map(function (item,i) {
+    var contents = db[global.construct]['items'].map(function (item, i) {
      return (
        <TouchableNativeFeedback key={i} onPress={() => navigate('Learn', {id: i})} background={TouchableNativeFeedback.SelectableBackground()}>
          <View style={StyleSheet.flatten([styles.itemContainer,{backgroundColor: global.color,}])} >

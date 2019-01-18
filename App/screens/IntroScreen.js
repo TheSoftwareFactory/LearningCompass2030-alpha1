@@ -1,7 +1,6 @@
 import React from 'react';
-import {Image, Text, List, ListItem, Platform, ScrollView, StyleSheet, TouchableOpacity, View, 
-StatusBar, Animated, Alert, AppRegistry, Button, TouchableHighlight, WebView, TouchableNativeFeedback, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
-import { getTimeFieldValues } from 'uuid-js';
+import {Image, Text, TextInput, Picker, ScrollView, StyleSheet, TouchableOpacity, View, Alert, WebView, AsyncStorage } from 'react-native';
+
 
 export default class IntroScreen extends React.Component {
 
@@ -13,17 +12,27 @@ export default class IntroScreen extends React.Component {
       pressed: [0,0,0,0,0,0,0,0,0,0,0,0],
       fields: ['Sports', 'News', 'Entertainment', 'Lifestyle', 'Music', 'Science', 
       'Technology', 'Education', 'Art', 'Culture', 'Politics', 'Game'],
-      intere : 'You must firstly submit your interest in the introduction part in order to get recommendation.', };
+      intere : 'You must firstly submit your interest in the introduction part in order to get recommendation.',
+      login: false,
+      register: false,
+      gd: 'Select',
+      current_id: null,
+      };
   }
   
   static navigationOptions = {
     title: 'Introduction',
   };
 
+  componentWillMount() {
+    AsyncStorage.getItem('current_id').then((crid) => {
+      this.setState (() => ({ current_id: crid })) ;
+    })
+  }
+
   /* Body */
   render() {
     const {navigate} = this.props.navigation;
-    const {dismiss} = this.props.navigation;
     const color1 = '#184726';
     const color2 = '#5f8c6c';
     const consts = ["Life Satisfaction", "Health", "Civic Engagement", "Environment", "Education", "Community", "Jobs", 
@@ -39,63 +48,196 @@ export default class IntroScreen extends React.Component {
       { pressed: tem_state }
     )) }
     goToHome = () => { navigate('Home', {'intere' : this.state.intere} ); }
+    goToLogin = () => { navigate('Login', {} ); }
     updateIntere = () => { 
       var rcm = Math.abs(this.state.pressed[0]+2*this.state.pressed[1]+4*this.state.pressed[2]+8*this.state.pressed[3]+
       16*this.state.pressed[4]+32*this.state.pressed[5]+64*this.state.pressed[6]+128*this.state.pressed[7]+
       +256*this.state.pressed[8]+512*this.state.pressed[9]+1024*this.state.pressed[10]+2048*this.state.pressed[11]) % 11;
       this.setState (() => ({ intere : consts[rcm]})) }
-     showAlertWithDelay=()=>{
+    showAlertWithDelay=()=>{
       setTimeout(function(){
         //Put All Your Code Here, Which You Want To Execute After Some Delay Time.
         Alert.alert("Alert Shows After 1 Seconds of Delay.")
-      }, 1000);
+      }, 1000);}
+
+    loginWindow = () => {
+      if (this.state.login) {
+        if (this.state.lg_id  == null | this.state.lg_id  == null) {
+          Alert.alert("Please fill in all required filled !");
+         } else {
+        AsyncStorage.getItem(this.state.lg_id).then((pswd) => {
+          if ( pswd == this.state.lg_pw ) {
+             AsyncStorage.setItem('current_id', this.state.lg_id).then(() => {
+              Alert.alert("You are now logged in !"); 
+              this.setState (previousState => ({ login: !previousState.login, register: false, current_id: this.state.lg_id }));
+            }  )
+           } else {Alert.alert("Login failed !")}
+        } ) }
+      } else { this.setState (previousState => ({ login: !previousState.login, register: false })); }
+    }
+
+    registerWindow = () => { 
+      if (this.state.register) {
+         
+        if ( this.state.id == null | this.state.pw1 == null | this.state.pw2 == null | this.state.em == null | this.state.gd == 'Select' | this.state.ag == null) 
+        {Alert.alert("Please fill in all required filled !"); } else {
+        AsyncStorage.getItem(this.state.id).then((pswd) => { 
+          if ( pswd != null) {  // ??????
+            Alert.alert("Sorry, this id is already registered !")
+          } else if (this.state.pw1 != this.state.pw2) {
+            Alert.alert("Register failed: two passwords are not consistent !")
+          } else {
+            AsyncStorage.setItem(this.state.id, this.state.pw1).then(() => {
+              Alert.alert('Welcome ' + this.state.id + ', you are now registered !')   ///// ???????
+              this.setState ((previousState) => ({ name: this.state.id, register: !previousState.register, login: false, current_id: this.state.id })) 
+            }   ) 
+          }
+        } ) }
+     } else {this.setState (previousState => ({ register: !previousState.register, login: false })); }
+    }
    
+    clearCurrentId = () => {
+      Alert.alert(
+        'Do you want to log out from this account ?',
+        'Log out will not lose data of this account, but you have to type your username and password again.',
+        [
+          {text: 'Cancel', onPress: () => {}, style: 'cancel'},
+          {text: 'Sure', onPress: () => AsyncStorage.removeItem('current_id').then(() => {
+            this.setState ({ current_id: null });
+          })},
+        ],
+        { cancelable: false }
+      )
+    }
+
+    clearAll = () => {
+      Alert.alert(
+        'Are you sure you want to clear all the data saved in this App ?',
+        'This operation is not possible to be recovered!',
+        [
+          {text: 'Cancel', onPress: () => {}, style: 'cancel'},
+          {text: 'Sure', onPress: () => AsyncStorage.clear()},
+        ],
+        { cancelable: false }
+      )
     }
 
     switch (this.state.stage)  {
-      
-      /*           <WebView
-             source={fallingLake}
-          /> */
       case 0: return (
         <View style={styles.container}>
           <ScrollView>
-          <Image source={require('../assets/images/OECD2030_Post.jpg')} style={{width: '60%', height: 300, alignSelf : 'center', margin: 2}}/>
-          <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
-                 <TouchableOpacity onPress={() => {} } > 
-                   <View style={  {  backgroundColor : "#848705",  margin : 5, width: '90%'}  }>
+
+          { this.state.login | this.state.register ? null :  
+          <Image source={require('../assets/images/OECD2030_Post.jpg')} style={{width: '60%', height: 300, alignSelf : 'center', margin: 2}}/>}
+
+          { this.state.login ?
+          <View style={styles.textInputView}>
+            <TextInput
+            style={styles.textInputText}
+            placeholder="Username"
+            onChangeText={(text) => {this.setState({ lg_id: text })}}
+            />
+            <TextInput
+            secureTextEntry={true}
+            style={styles.textInputText}
+            placeholder="Password"
+            onChangeText={(text) => {this.setState({ lg_pw: text })}}
+            />
+          </View> 
+          : null }
+
+          { this.state.register ?
+           <View style={styles.textInputView}> 
+            <TextInput
+            style={styles.textInputText}
+            placeholder="Username"
+            onChangeText={(text) => {this.setState({ id: text })}}
+            />
+            <TextInput
+            style={styles.textInputText}
+            placeholder="Password"
+            secureTextEntry={true}
+            onChangeText={(text) => {this.setState({ pw1: text })}}
+            />
+            <TextInput
+            style={styles.textInputText}
+            secureTextEntry={true}
+            placeholder="Confirm Password"
+            onChangeText={(text) => {this.setState({ pw2: text })}}
+            />
+            <TextInput
+            style={styles.textInputText}
+            placeholder="Email Address"
+            onChangeText={(text) => {this.setState({ em: text })}}
+            />
+            <Text style={{color: 'white', alignSelf: 'flex-start', marginLeft: '5%'}}>Gender</Text>
+            <Picker
+            selectedValue={this.state.gd}
+            style={{height: 40, width: '90%', color: 'white', backgroundColor: 'black'}}
+            onValueChange={(itemValue) => {this.setState({gd: itemValue});}}
+            placeholder='Gender'
+            mode = 'dropdown'>
+            <Picker.Item label="Female" value="Female"/>
+            <Picker.Item label="Male" value="Male"/>
+            </Picker>
+            <TextInput
+            style={styles.textInputText}
+            placeholder="Age"
+            onChangeText={(text) => { this.setState({ ag: text })}}
+            />
+          </View> 
+          : null }
+
+          <View style={{ flexDirection: 'column'}}>
+               { this.state.register | this.state.current_id != null ? null :
+                <TouchableOpacity onPress={() => loginWindow() } > 
+                   <View style={  styles.textInputView }>
                     <Text  style={styles.subtitle}>Login</Text>
                    </View>
-                 </TouchableOpacity>
-                 <TouchableOpacity onPress={() => {} } > 
-                   <View style={  {  backgroundColor : "#848705",  margin : 5, width: '90%'}  }>
+                 </TouchableOpacity> }
+
+                 { this.state.login | this.state.current_id != null ? null :
+                 <TouchableOpacity onPress={() => registerWindow() } > 
+                   <View style={  styles.textInputView   }>
                     <Text  style={styles.subtitle}>Register</Text>
                    </View>
-                 </TouchableOpacity>
-                 <TouchableOpacity onPress={() => {} } > 
-                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>First Page</Text>
+                 </TouchableOpacity> }
+          </View>
+
+          { this.state.current_id == null ? null :
+                <TouchableOpacity onPress={() => clearCurrentId() } > 
+                   <View style={  styles.textInputView  }>
+                    <Text  style={styles.subtitle}>You are logged in as {this.state.current_id}{'\n'}{'\n'}(Click to Switch User)</Text>
                    </View>
-                 </TouchableOpacity>
+                 </TouchableOpacity> }
+
+          <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
+                 { this.state.login | this.state.register ? 
+                 <TouchableOpacity onPress={() => {this.setState (() => ({ login: false, register: false })); }} > 
+                 <View style={  {  backgroundColor : "gold",  margin : 5}  }>
+                  <Text  style={styles.subtitle}>Back</Text>
+                 </View>
+               </TouchableOpacity> :
                  <TouchableOpacity onPress={() => goLast()} > 
                    <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
                     <Text  style={styles.subtitle}>Skip</Text>
                    </View>
-                 </TouchableOpacity>
+                 </TouchableOpacity> }
                  <TouchableOpacity onPress={() => goNext() } > 
                    <View style={  {  backgroundColor : "#058764",  margin : 5}  }>
                     <Text  style={styles.subtitle}>Next</Text>
                    </View>
                  </TouchableOpacity> 
-                 <TouchableOpacity onPress={() => goLast()  } > 
-                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>Last Page</Text>
-                   </View>
-                 </TouchableOpacity>
             </View>
+
+            { this.state.login | this.state.register ? null :
+            <TouchableOpacity onPress={() => clearAll() } > 
+                   <View style={  {  backgroundColor : "red",  margin: 5, width: '20%', alignSelf: 'flex-end'}  }>
+                    <Text  style={ {color: 'white', alignSelf: 'center'} }>Reset</Text>
+                   </View>
+            </TouchableOpacity> }
           </ScrollView>
         </View>
-        
       );
     
     
@@ -113,11 +255,6 @@ export default class IntroScreen extends React.Component {
             education systems. It is about orientation, not prescription. </Text>
           </View>
           <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
-                 <TouchableOpacity onPress={() => goFirst() } > 
-                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>First Page</Text>
-                   </View>
-                 </TouchableOpacity>
                  <TouchableOpacity onPress={() => goBack() } > 
                    <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
                     <Text  style={styles.subtitle}>Back</Text>
@@ -128,11 +265,6 @@ export default class IntroScreen extends React.Component {
                     <Text  style={styles.subtitle}>Next</Text>
                    </View>
                  </TouchableOpacity> 
-                 <TouchableOpacity onPress={() => goLast()  } > 
-                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>Last Page</Text>
-                   </View>
-                 </TouchableOpacity>
             </View>
         </ScrollView>
       </View>
@@ -157,11 +289,6 @@ export default class IntroScreen extends React.Component {
              satisfaction, health, civic engagement, environment, education and community. </Text>
           </View>
           <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
-                 <TouchableOpacity onPress={() => goFirst() } > 
-                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>First Page</Text>
-                   </View>
-                 </TouchableOpacity>
                  <TouchableOpacity onPress={() => goBack() } > 
                    <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
                     <Text  style={styles.subtitle}>Back</Text>
@@ -172,11 +299,6 @@ export default class IntroScreen extends React.Component {
                     <Text  style={styles.subtitle}>Next</Text>
                    </View>
                  </TouchableOpacity> 
-                 <TouchableOpacity onPress={() => goLast()  } > 
-                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>Last Page</Text>
-                   </View>
-                 </TouchableOpacity>
             </View>
         </ScrollView>
       </View>
@@ -236,11 +358,6 @@ export default class IntroScreen extends React.Component {
             <Text style={styles.contents}> Gets more diverse. </Text>
           </View>
           <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
-                 <TouchableOpacity onPress={() => goFirst() } > 
-                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>First Page</Text>
-                   </View>
-                 </TouchableOpacity>
                  <TouchableOpacity onPress={() => goBack() } > 
                    <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
                     <Text  style={styles.subtitle}>Back</Text>
@@ -251,11 +368,6 @@ export default class IntroScreen extends React.Component {
                     <Text  style={styles.subtitle}>Next</Text>
                    </View>
                  </TouchableOpacity> 
-                 <TouchableOpacity onPress={() => goLast()  } > 
-                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>Last Page</Text>
-                   </View>
-                 </TouchableOpacity>
             </View>
         </ScrollView>
       </View>
@@ -308,11 +420,6 @@ and in post-secondary education, they want education to be job market oriented
 in order to facilitate their integration on the job market. </Text>
           </View>
           <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
-                 <TouchableOpacity onPress={() => goFirst() } > 
-                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>First Page</Text>
-                   </View>
-                 </TouchableOpacity>
                  <TouchableOpacity onPress={() => goBack() } > 
                    <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
                     <Text  style={styles.subtitle}>Back</Text>
@@ -323,11 +430,6 @@ in order to facilitate their integration on the job market. </Text>
                     <Text  style={styles.subtitle}>Next</Text>
                    </View>
                  </TouchableOpacity> 
-                 <TouchableOpacity onPress={() => goLast()  } > 
-                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>Last Page</Text>
-                   </View>
-                 </TouchableOpacity>
             </View>
         </ScrollView>
       </View>
@@ -344,11 +446,6 @@ in order to facilitate their integration on the job market. </Text>
            source={{uri: 'https://www.youtube.com/embed/tkm_WzQRPEk'}} 
            style={{width: "100%", height: 300}}/>
            <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
-                 <TouchableOpacity onPress={() => goFirst() } > 
-                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>First Page</Text>
-                   </View>
-                 </TouchableOpacity>
                  <TouchableOpacity onPress={() => goBack() } > 
                    <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
                     <Text  style={styles.subtitle}>Back</Text>
@@ -359,11 +456,6 @@ in order to facilitate their integration on the job market. </Text>
                     <Text  style={styles.subtitle}>Next</Text>
                    </View>
                  </TouchableOpacity> 
-                 <TouchableOpacity onPress={() => goLast()  } > 
-                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>Last Page</Text>
-                   </View>
-                 </TouchableOpacity>
             </View>
         </ScrollView>
       </View>
@@ -450,11 +542,6 @@ in order to facilitate their integration on the job market. </Text>
           </View>
 
           <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
-                 <TouchableOpacity onPress={() => goFirst() } > 
-                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>First Page</Text>
-                   </View>
-                 </TouchableOpacity>
                  <TouchableOpacity onPress={() => goBack() } > 
                    <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
                     <Text  style={styles.subtitle}>Back</Text>
@@ -465,11 +552,6 @@ in order to facilitate their integration on the job market. </Text>
                     <Text  style={styles.subtitle}>Submit</Text>
                    </View>
                  </TouchableOpacity> 
-                 <TouchableOpacity onPress={() => goLast()  } > 
-                   <View style={  {  backgroundColor : "#055987",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>Last Page</Text>
-                   </View>
-                 </TouchableOpacity>
             </View>
           
         </ScrollView>
@@ -485,10 +567,10 @@ in order to facilitate their integration on the job market. </Text>
            source={{uri: 'https://storage.googleapis.com/symmetric-lotus-227804.appspot.com/html5-canvas-waterfall-lake/index.html'}} 
            style={{width: "100%", marginTop: 5}}/>
            <View style={{ alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
-                 <TouchableOpacity onPress={() => goFirst() } > 
-                   <View style={  {  backgroundColor : "#848705",  margin : 5}  }>
-                    <Text  style={styles.subtitle}>First Page</Text>
-                   </View>
+                <TouchableOpacity onPress={() => goFirst()} > 
+                  <View style={  {  backgroundColor : "gold",  margin : 5}  }>
+                   <Text  style={styles.subtitle}>Go First</Text>
+                  </View>
                  </TouchableOpacity>
                  <TouchableOpacity onPress={() => goBack() } > 
                    <View style={  {  backgroundColor : "#4c8705",  margin : 5}  }>
@@ -561,4 +643,20 @@ const styles = StyleSheet.create({
     margin : 10,
     fontWeight : 'normal',
   },
+  textInputView: {
+    backgroundColor : 'gray',
+    alignItems: 'center',
+    marginRight: "5%",
+    marginLeft: "5%",
+    padding: 20,
+    margin: 10
+  },
+  textInputText: {
+    width: '90%', 
+    borderColor: 'white', 
+    fontFamily: "noto-sans-thin", 
+    borderBottomWidth: 1, 
+    margin: 10,
+    color: 'white'
+  }
 });

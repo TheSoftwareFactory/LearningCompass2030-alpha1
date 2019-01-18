@@ -12,6 +12,7 @@ export default class HomeScreen extends React.Component {
       isLoading: true,
       interests: 'Recommended Start Point',
       credit: false,
+      name: 'User'
     };
   }
 
@@ -22,6 +23,9 @@ export default class HomeScreen extends React.Component {
 
   /* Data Structure */
   componentWillMount() {
+    AsyncStorage.getItem('current_id').then((idd) => {
+      this.setState(() => ({ name: idd }))
+    } );
     var db = require('../assets/data.json');
     AsyncStorage.multiGet(["LifeSatisfactionVal", "HealthVal", "CivicEngagementVal", "EnvironmentVal", "EducationVal", "CommunityVal", "JobsVal", "IncomeVal", "HousingVal", "WorkLifeBalanceVal", "SafetyVal"])
        .then((data) => {
@@ -200,28 +204,17 @@ export default class HomeScreen extends React.Component {
       </Svg.G>
       </Svg>
       </View>
-
+      
+      
       <View style={styles.textGetStarted}>
-      <Text  style={styles.h1}>Learning Compass</Text>
-      <Text style={styles.subtitle}>This application aims to build an understanding of the knowledge, skills, and values necessary to shape the future. Choose a construct to develop by touching one of the petals of the flower.
-      </Text>
+         <Text  style={styles.subtitle}> You are logged in as {this.state.name} </Text>
       </View>
 
       <TouchableOpacity onPress={() => _toScreen('DoNotKnow')} >
       <View style={styles.bottomTouch} >
       <Text  style={styles.subtitle2}> More About the Background </Text>
       </View>
-      </TouchableOpacity>
-
-      
-
-      <TouchableOpacity onPress={() => _showCredit()}>
-      <View style={styles.bottomTouch}>
-      <Text  style={styles.subtitle2}> Credit Information </Text>
-      </View>
-      </TouchableOpacity>
-     
-      { this.state.credit ? <Text  style={ {fontFamily: "noto-sans-thin", margin : 5}}> {creditPage} </Text> : null }    
+      </TouchableOpacity>    
       
       
       <TouchableOpacity onPress={() => updateInterest() } >
@@ -229,6 +222,14 @@ export default class HomeScreen extends React.Component {
       <Text  style={styles.subtitle2}> {this.state.interests}  </Text>
       </View>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => _showCredit()}>
+      <View style={styles.bottomTouch}>
+      <Text  style={styles.subtitle2}> About this App (Scroll Down) </Text>
+      </View>
+      </TouchableOpacity>
+     
+      { this.state.credit ? <Text  style={ {fontFamily: "noto-sans-thin", margin : 5}}> {creditPage} </Text> : null }
        
       </ScrollView>
       </View>
@@ -262,7 +263,7 @@ const styles = StyleSheet.create({
   },
   textGetStarted: {
     fontFamily: "noto-sans-light",
-    color:'#fff',
+    color:'black',
     alignItems: 'center',
     margin: 20,
   },
