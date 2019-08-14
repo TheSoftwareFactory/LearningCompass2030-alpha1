@@ -2,6 +2,8 @@
 # APK file is uploaded at shared google drive folder.
 This is to hand over the project.
 
+Stakeholders: OECD clients https://www.oecd.org/education/2030-project/
+
 This project is written by the language ‘react native’. A relevant and useful reference:
 https://facebook.github.io/react-native/docs/getting-started
 This project uses quick start (expo) environment.
