@@ -1,6 +1,7 @@
 # LearningCompass2030
-# APK file is uploaded at shared google drive folder.
-This is to hand over the project.
+## Note:
+1. *cyf1007818747*, *YIFAN CHENG*, and *Cheng Yifan* are the SAME author.
+2. APK file is uploaded at shared google drive folder.
 
 Stakeholders: OECD clients https://www.oecd.org/education/2030-project/
 
